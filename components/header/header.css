@@ -1,0 +1,12 @@
+.header {
+    display: grid;
+    grid-template: 1fr 1fr / repeat(3, 1fr);
+}
+
+form.searchForm>input {
+    margin: 0;
+}
+
+ul.userOptions>li.nav-item>a {
+    font-size: 40px;
+}
