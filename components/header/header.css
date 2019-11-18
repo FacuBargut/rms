@@ -3,6 +3,11 @@
     grid-template: 1fr 1fr / repeat(3, 1fr);
 }
 
+.subnavbar {
+    grid-column: 2/3;
+    grid-row: 2;
+}
+
 form.searchForm>input {
     margin: 0;
 }
