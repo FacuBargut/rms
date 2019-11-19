@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="css/css/all.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 
     <!-- Estilos header -->
     <link rel="stylesheet" href="components/header/header.css">
@@ -17,6 +18,27 @@
 <!-- header -->
 
     <?php include "components/header/header.php"; ?>
+
+    <section>
+
+        <div class="products-wrapper">
+        <?php 
+        for($i=0;$i<10;$i++){
+        ?>
+            <div class="card">
+                <img src="img/productos/guitarras/guitar.jpg" style="width:30%;" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <?php
+     }
+    ?>
+        </div>
+
+    </section>
 
 
 
