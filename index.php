@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="css/css/all.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
+    <link href="components/header/header.css" rel="stylesheet">
+    
 
     <!-- Estilos header -->
     <link rel="stylesheet" href="components/header/header.css">
@@ -69,6 +71,9 @@
 
 
         <section class="main container my-3">
+            <div class="offerTittle">
+                  <h1>Mejores ofertas</h1>
+            </div>
             
             <?php 
             for($i=0;$i<12;$i++){

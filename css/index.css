@@ -36,9 +36,15 @@ body {
 .main{
     grid-area: main;
     display: grid;
-    grid-template-columns: repeat(3, 1fr) ;
+    grid-template: 4% 1fr / repeat(3, 1fr) ;
 
 }
+
+.main > .offerTittle{
+    grid-column: 1/4;
+}
+
+
 .footer{
     grid-area: footer;
     display: grid;
