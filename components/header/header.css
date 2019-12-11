@@ -1,17 +1,14 @@
-.header {
+ 
+.header-top{
+    grid-area: header-top;
+}
+.header-bottom{
+    grid-area: header-bottom;
     display: grid;
-    grid-template: 1fr 1fr / repeat(3, 1fr);
-}
+    grid-template-columns: 1fr 1fr 1fr;
+} 
 
-.subnavbar {
+.subnavbar-bottom {
     grid-column: 2/3;
-    grid-row: 2;
-}
-
-form.searchForm>input {
-    margin: 0;
-}
-
-ul.userOptions>li.nav-item>a {
-    font-size: 40px;
+    margin: 0 auto;
 }

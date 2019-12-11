@@ -1,0 +1,18 @@
+.info{
+    background: black;
+    color: grey;
+    height: 50px;
+    font-size: 14px;
+    color: #a6a6a6;
+    position: relative;
+    height: 300px;
+    padding: 20px 10px 10px 40px;
+}
+
+.info i {
+    color: white;
+    margin-right: 7px;
+}
+b, h4{
+    color:white;
+}
