@@ -9,6 +9,7 @@ body {
     display: grid;
     grid-template: 200px 1fr 300px / 1fr;
     grid-template-areas: "header"
+                         "slider"
                          "main"
                          "footer";
 }
@@ -20,6 +21,17 @@ body {
     grid-template-areas: "header-top"
                         "header-bottom";
 }
+/* Carrousel styles */
+.carousel{
+    grid-area: slider;
+}
+
+.carousel > .carousel-inner > .carousel-item > img{
+    /* height: auto; */
+    width:640px;
+    height:360px;
+}
+
 
 .main{
     grid-area: main;
