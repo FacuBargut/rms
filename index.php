@@ -23,7 +23,7 @@
             <?php include "components/header/header.php"; ?>
         </div>
         
-        <div class="bd-example">
+        
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -32,24 +32,24 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="img/carrousel/publicidad1.png" class="d-block w-100" alt="...">
+        <img src="img/carrousel/feder.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h5>Mira lo ultimo de Fender</h5>
+          <p>Enterate de los ultimos productos que ingresaron a nuestra tienda</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="img/carrousel/fender.png" class="d-block w-100" alt="...">
+        <img src="img/carrousel/gibson.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h5>Gibson nunca se queda atras!</h5>
+          <p>Como siempre, Gibson demostrando su calidad en guitarras. Entra y mira lo ultimo que ingreso</p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="img/carrousel/acoustic.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          <h5>Lo clasico nunca pasa de moda</h5>
+          <p>Enterate de lo ultimo en guitarras acusticas y electroacusticas para darle ese toque clasico a tus canciones</p>
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-</div>
+
 
 
 
