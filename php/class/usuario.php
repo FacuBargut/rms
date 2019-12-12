@@ -21,12 +21,23 @@ class usuario {
         $this->telephone = $telephone;
     }
 
+    public function getPassword(){
+        return $this->password;
+    }
+
+
     public static function loginUser($email, $password){
         
         include "../conexion.php";
-        $stmt = $mysqli->query("SELECT * FROM Usuarios");
-        $user = $stmt->fetch();
-        echo $user;
+        $stmt = $conn->query("SELECT * FROM Usuarios WHERE email = '$email' and password = '$password'");
+        $result = $stmt->num_rows;
+
+        if($result == 0){
+            return "Usuario no encontrado";
+            exit;
+        }
+        $user = $stmt->fetch_object();
+        return $user; 
     }
 
 }
