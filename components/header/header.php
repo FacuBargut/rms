@@ -9,12 +9,12 @@
         <button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
     </form>
     <ul class="navbar-nav ml-auto userOptions">
-        <li class="nav-item ">
+        <li class="nav-item nav-item-user">
             <a class="nav-link text-white" href="#">
                 <i class="fas fa-user"></i>
             </a>       
         </li>
-        <li class="nav-item ">
+        <li class="nav-item nav-item-shopping-cart">
             <a class="nav-link text-white" href="#">
                 <i class="fas fa-shopping-cart"></i>
             </a>       
