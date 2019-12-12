@@ -14,6 +14,25 @@ $(document).ready(function(){
         
     })
 
+    //Click en el boton de logueo
+    $('body').on("click","#loginForm>button",function(){
+
+        var datos = {
+            mail : $('#LoginEmail').val(),
+            pass : $('#LoginPassword').val(),
+        };
+
+        $.ajax({
+            type:'POST',
+            url:'./php/script/usuario/loguearUsuario.php',
+            data: {datos},
+            success: function(data){
+
+                console.log(data);
+
+            }
+        })
+    })
 
 })
 

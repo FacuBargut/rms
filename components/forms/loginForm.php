@@ -1,4 +1,4 @@
-<form>
+<form id="loginForm">
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" class="form-control" id="LoginEmail" aria-describedby="loginEmail" placeholder="Ingrese email">
