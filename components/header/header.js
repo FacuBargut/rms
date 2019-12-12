@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     //Header
-    //Llamando formulario de logeo
+    //#region llamando formulario de logeo
     $('.nav-item-user').on("click",function(){
         $('#modal').modal('show')
         $('.modal-title').text("Login de usuario")
@@ -13,8 +13,9 @@ $(document).ready(function(){
           }, 500);
         
     })
+    //#endregion 
 
-    //Click en el boton de logueo
+    //#region click en el boton de logeo
     $('body').on("click","#loginForm>button",function(){
 
         //Validacion del formulario de logeo
@@ -54,7 +55,15 @@ $(document).ready(function(){
             }
         })
     })
-
+    //#endregion
+    
+    //#region click en el icono de carro de compras
+    $('body').on("click", ".nav-item-shopping-cart",function(){
+        $('.modal-chart').fadeIn(200, function(){
+            $('.charter-wrapper').css("right","0%");
+        })
+    })
+    //#endregion
 })
 
 

@@ -16,11 +16,21 @@
     <link rel="stylesheet" href="components/footer/footer.css">
 
     <title>Rosario Music Shop</title>
+
+
+    
+
+
+
 </head>
+
+
 <body>
 
 <!-- header -->
+
     <div class="wrapper">
+
         <div class="header">
             <?php include "components/header/header.php"; ?>
         </div>
@@ -101,6 +111,8 @@
          include "components/modal/modal-usuario.php"
 
     ?>
+
+
 
     
 

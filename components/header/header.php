@@ -64,4 +64,20 @@
           </ul>
         </div>
       </nav>
-    
+
+
+<div class="modal-chart">
+  <div class="charter-wrapper">
+      <div class="title-wrapper">
+          <h1>Carrito de compras</h1>
+      </div>
+      <hr>
+      <div class="charter-body">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+      </div>
+  </div>
+</div>
