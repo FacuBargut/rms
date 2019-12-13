@@ -1,3 +1,8 @@
+<?php
+      include "php/class/usuario.php";
+      session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,27 +13,19 @@
     <link href="css/css/all.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
     <link href="components/header/header.css" rel="stylesheet">
-    
-
     <!-- Estilos header -->
     <link rel="stylesheet" href="components/header/header.css">
     <!-- Estilos footer -->
     <link rel="stylesheet" href="components/footer/footer.css">
 
     <title>Rosario Music Shop</title>
-
-
-    
-
-
-
 </head>
-
 
 <body>
 
 <!-- header -->
-
+<?php print_r ($_SESSION['user']);
+?>
     <div class="wrapper">
 
         <div class="header">
@@ -75,32 +72,27 @@
     </a>
   </div>
 
-
-
-
-
-
-        <section class="main container my-3">
-            <div class="offerTittle">
-                  <h1>Mejores ofertas</h1>
-            </div>
-            
-            <?php 
-            for($i=0;$i<12;$i++){
-            ?>
-                <div class="card">
-                    <img src="img/productos/guitarras/guitar.jpg" style="width:30%;" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <?php
-        }
-        ?>
-            
-        </section>
+  <section class="main container my-3">
+      <div class="offerTittle">
+            <h1>Mejores ofertas</h1>
+      </div>
+      
+      <?php 
+      for($i=0;$i<12;$i++){
+      ?>
+          <div class="card">
+              <img src="img/productos/guitarras/guitar.jpg" class="card-img-top">
+              <div class="card-body">
+                  <h5 class="card-title">Nombre del instrumento</h5>
+                  <p>Precio del instrumento</p>
+                  <a href="#" class="btn btn-primary btn-block">Ver más</a>
+              </div>
+          </div>
+          <?php
+  }
+  ?>
+      
+  </section>
 
         <div class="footer">
             <?php include "components/footer/footer.php"; ?>

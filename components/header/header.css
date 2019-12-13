@@ -12,6 +12,20 @@ nav > ul.navbar-nav > li.nav-item{
     font-size: 35px;
 }
 
+nav > ul.navbar-nav > .nav-item-loggedUser, .nav-item-loggedUser-min{
+    background: #28a745;
+    border-radius: 35px;
+}
+
+.nav-item-loggedUser-min{
+    background: #28a745;
+    font-size: 20px;
+    padding: 15px;
+    color: white;
+}
+
+
+
 
 .subnavbar-bottom {
     grid-column: 2/3;
@@ -31,6 +45,7 @@ nav > ul.navbar-nav > li.nav-item{
     transition: all ease .4s;
     overflow: hidden;
     display: none;
+    cursor: pointer;
 }
 
 .modal-chart > .charter-wrapper{
@@ -42,4 +57,5 @@ nav > ul.navbar-nav > li.nav-item{
     text-align: center;
     padding: 10px;
     transition: all ease .3s;
+    cursor: auto;
 }

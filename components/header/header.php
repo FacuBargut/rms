@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-sm bg-dark header-top">
-    <a class="navbar-brand text-white logo" href="#">RMS-Rosario Music Shop</a>
-
+    <a class="navbar-brand text-white logo" href="index.php">RMS-Rosario Music Shop</a>
     <form class="form-inline m-auto searchForm">
         <input class="form-control"
                type="search"
@@ -9,11 +8,41 @@
         <button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
     </form>
     <ul class="navbar-nav ml-auto userOptions">
-        <li class="nav-item nav-item-user">
-            <a class="nav-link text-white" href="#">
-                <i class="fas fa-user"></i>
-            </a>       
-        </li>
+        <?php
+              if(isset($_SESSION['usuario'])){
+                ?>
+                <li class="nav-item nav-item-user">
+                    <a class="nav-link text-white" href="#">
+                    </a>       
+                </li>
+                <?php
+              }else{
+                ?>
+                <li class="nav-item nav-item-loggedUser dropdown">
+                    <a class="nav-link text-white" href="#" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+                        <?php echo substr($_SESSION['user']->getName(), 0, 1).substr($_SESSION['user']->getSurname(), 0, 1) ?>
+                        
+                    </a>
+                    <div class="dropdown-menu menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" >
+                        <a style="padding: 10px 9px;" class="dropdown-item" href="#">
+
+                          <h5>
+                              <span class="nav-item nav-item-loggedUser-min dropdown">
+                                  <?php echo substr(trim($_SESSION['user']->getName()), 0, 1).substr(trim($_SESSION['user']->getSurname()), 0, 1) ?>
+                              </span>
+                              <?php echo trim($_SESSION['user']->getName())." ".trim($_SESSION['user']->getSurname()); ?>
+                          </h5>
+                          <p style="margin-left:17%;"><?php echo $_SESSION['user']->getEmail(); ?></p>
+                          
+                        </a>
+                        <a class="dropdown-item" href="#">Historial de compras</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                    </div>       
+                </li>
+                <?php
+              }
+        ?>
         <li class="nav-item nav-item-shopping-cart">
             <a class="nav-link text-white" href="#">
                 <i class="fas fa-shopping-cart"></i>
@@ -33,9 +62,9 @@
                 Guitarras
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Clásicas</a>
-                <a class="dropdown-item" href="#">Electroacusticas</a>
-                <a class="dropdown-item" href="#">Electricas</a>
+                <a class="dropdown-item" href="listado.php">Clásicas</a>
+                <a class="dropdown-item" href="listado.php">Electroacusticas</a>
+                <a class="dropdown-item" href="listado.php">Electricas</a>
               </div>
             </li>
   
@@ -44,8 +73,8 @@
                 Bajos
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Electricos</a>
-                <a class="dropdown-item" href="#">Acusticos</a>
+                <a class="dropdown-item" href="listado.php">Electricos</a>
+                <a class="dropdown-item" href="listado.php">Acusticos</a>
               </div>
             </li>
   
@@ -54,11 +83,11 @@
                 Baterías
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Acusticas</a>
-                <a class="dropdown-item" href="#">Electricas</a>
-                <a class="dropdown-item" href="#">Platillos</a>
-                <a class="dropdown-item" href="#">Redoblantes</a>
-                <a class="dropdown-item" href="#">Percusion</a>
+                <a class="dropdown-item" href="listado.php">Acusticas</a>
+                <a class="dropdown-item" href="listado.php">Electricas</a>
+                <a class="dropdown-item" href="listado.php">Platillos</a>
+                <a class="dropdown-item" href="listado.php">Redoblantes</a>
+                <a class="dropdown-item" href="listado.php">Percusion</a>
               </div>
             </li>
           </ul>

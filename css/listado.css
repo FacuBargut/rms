@@ -10,7 +10,6 @@ body {
     display: grid;
     grid-template: 200px 400px 1fr 300px / 1fr;
     grid-template-areas: "header"
-                         "slider"
                          "main"
                          "footer";
 }
@@ -52,13 +51,4 @@ body {
     grid-template-columns: repeat(3, 1fr) ;
     background: black;
     
-}
-
-/* Cards */
-.card{
-    border:none;
-}
-
-.card > img{
-    width: 90%;
 }

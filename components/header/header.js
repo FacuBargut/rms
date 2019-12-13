@@ -17,7 +17,7 @@ $(document).ready(function(){
 
     //#region click en el boton de logeo
     $('body').on("click","#loginForm>button",function(){
-
+        
         //Validacion del formulario de logeo
 
         let mail = $('#LoginEmail').val();
@@ -40,6 +40,7 @@ $(document).ready(function(){
             url:'./php/script/usuario/loguearUsuario.php',
             data: {datos},
             success: function(data){
+                alert();
                 console.log(data);
                 switch(data.trim()){
                     case "Usuario no encontrado":
@@ -49,7 +50,7 @@ $(document).ready(function(){
                         $('#LoginEmail').focus();
                         break;
                     case "Sesión iniciada":
-                        location.reload();
+                        // location.reload();
                     break;
                 }
             }
@@ -58,12 +59,27 @@ $(document).ready(function(){
     //#endregion
     
     //#region click en el icono de carro de compras
+    
     $('body').on("click", ".nav-item-shopping-cart",function(){
         $('.modal-chart').fadeIn(200, function(){
             $('.charter-wrapper').css("right","0%");
         })
     })
     //#endregion
+
+    //#region click en el modal del carro de compra
+    $('body').on("click",".modal-chart", function(e){
+        if(e.target !== this){
+            return;
+        }else{
+            $('.modal-chart').fadeOut(200);
+            $('.charter-wrapper').css("right","-30%");
+        }
+    })
+    //#endregion
+
+
+
 })
 
 

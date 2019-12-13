@@ -8,6 +8,9 @@
 
     $user = usuario::loginUser($mail, $password);
 
+    echo $user;
+    exit;
+
     if($user === "Usuario no encontrado"){
         echo "Usuario no encontrado";
     }else{
