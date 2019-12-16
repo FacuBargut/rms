@@ -9,10 +9,11 @@
     </form>
     <ul class="navbar-nav ml-auto userOptions">
         <?php
-              if(isset($_SESSION['usuario'])){
+              if(!isset($_SESSION['usuario'])){
                 ?>
                 <li class="nav-item nav-item-user">
                     <a class="nav-link text-white" href="#">
+                    <i class="fas fa-user"></i>
                     </a>       
                 </li>
                 <?php

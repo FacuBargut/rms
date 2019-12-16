@@ -24,8 +24,6 @@
 <body>
 
 <!-- header -->
-<?php print_r ($_SESSION['user']);
-?>
     <div class="wrapper">
 
         <div class="header">
@@ -78,10 +76,26 @@
       </div>
       
       <?php 
-      for($i=0;$i<12;$i++){
+      for($i=0;$i<4;$i++){
       ?>
           <div class="card">
               <img src="img/productos/guitarras/guitar.jpg" class="card-img-top">
+              <div class="card-body">
+                  <h5 class="card-title">Nombre del instrumento</h5>
+                  <p>Precio del instrumento</p>
+                  <a href="#" class="btn btn-primary btn-block">Ver más</a>
+              </div>
+          </div>
+          <div class="card">
+              <img src="img/productos/guitarras/ibanes.jpg" class="card-img-top">
+              <div class="card-body">
+                  <h5 class="card-title">Nombre del instrumento</h5>
+                  <p>Precio del instrumento</p>
+                  <a href="#" class="btn btn-primary btn-block">Ver más</a>
+              </div>
+          </div>
+          <div class="card">
+              <img src="img/productos/guitarras/fender.jpg" class="card-img-top">
               <div class="card-body">
                   <h5 class="card-title">Nombre del instrumento</h5>
                   <p>Precio del instrumento</p>
