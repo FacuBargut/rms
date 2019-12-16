@@ -30,7 +30,7 @@ $(document).ready(function(){
             $('#registerEmail').focus();
             $( "#registerEmail" ).addClass("is-invalid" );
 
-        }else if(password != passwordConfirmed){
+        }else if(password != passwordConfirmed ){
                 $('#registerPassword1').val('');
                 $('#registerPassword2').val('');
                 $('#registerPassword1').focus();
@@ -38,7 +38,32 @@ $(document).ready(function(){
                 $( "#registerPassword2" ).addClass("is-invalid" );
                 console.log("Las contraseñas no coinciden")
         }else{
-            console.log("registrando usuario");
+
+
+            var user = {
+                name: name,
+                surname: surname,
+                mail: mail,
+                password: password,
+                active: 0,
+                admin: 0,
+                telefono: telefono
+
+            }
+
+
+
+            $.ajax({
+                type:'POST',
+                url: '../php/script/usuario/altaUsuario.php',
+                data: {user},
+                success: function(data){
+
+                    console.log("respuesta del script: ", data);
+                }
+            })
+
+            
         }
 
 
@@ -84,7 +109,7 @@ $(document).ready(function(){
       $("#registerPassword2").blur(function(){
         var password1 = $('#registerPassword1').val();
         var password2 = $('#registerPassword2').val();
-        if( password1 === password2){
+        if( password1 === password2 && password2.trim() != ""){
             $( "#registerPassword1" ).removeClass("is-invalid").addClass("is-valid");
             $( "#registerPassword2" ).removeClass("is-invalid").addClass("is-valid");
         }else{
@@ -96,7 +121,7 @@ $(document).ready(function(){
       $("#registerPassword1").blur(function(){
         var password1 = $('#registerPassword1').val();
         var password2 = $('#registerPassword2').val();
-        if( password1 === password2){
+        if( password1 === password2 && password1 != ""){
             $( "#registerPassword1" ).removeClass("is-invalid").addClass("is-valid");
             $( "#registerPassword2" ).removeClass("is-invalid").addClass("is-valid");
         }else{

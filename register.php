@@ -52,6 +52,11 @@
                     <label for="registerPassoword2">Confirmar contraseña</label>
                     <input type="password" class="form-control" id="registerPassword2" aria-describedby="ConfirmarContraseña" placeholder="Confirmar contraseña">
                   </div>
+                  <div class="form-group">
+                    <label>Numero de telefono</label>
+                    <input type="text" class="form-control" id="registerCodArea" aria-describedby="Codigo de area" placeholder="Cód. Área">
+                    <input type="text" class="form-control" id="registerTelephoneNumber" aria-describedby="Numero de telefono" placeholder="Número de telefono">
+                  </div>
   
                   <button class="btn btn-primary" id="registerUser" type="submit">Registrar</button>
                 </form>

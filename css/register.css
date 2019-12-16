@@ -30,6 +30,23 @@ body {
     float: right;
 }
 
+.main > form > div:nth-child(6)>label:nth-child(1){
+    display: block;
+}
+
+.main > form > div:nth-child(6)>input{
+
+    display: inline-block;
+}
+
+.main > form > div:nth-child(6)>input:nth-child(2){
+
+    width: 20%;
+} 
+.main > form > div:nth-child(6)>input:nth-child(3){
+
+    width: 79%;
+} 
 
 .footer{
     grid-area: footer;
@@ -38,3 +55,6 @@ body {
     background: black;
     
 }
+
+
+
