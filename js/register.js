@@ -95,9 +95,11 @@ $(document).ready(function() {
 
         } else {
 
+            $('.errors>.errors-body>li').css("display","none");
+
             console.log("Mostrando errores: ");
             errors.forEach(element => {
-                $('.errors').append("<li>" + element + "</li>")
+                $('.errors>.errors-body').append("<li>" + element + "</li>")
                 $('.errors').css("display", "block");
                 console.log(element);
             });
@@ -180,11 +182,14 @@ $(document).ready(function() {
         if (telephoneNumber != "" && telephoneNumber.length == 7 && numeros.test(telephoneNumber.trim())) {
             $("#registerTelephoneNumber").removeClass("is-invalid").addClass("is-valid");
         } else {
-            $("#registerTelephoneNusmber").removeClass("is-valid").addClass("is-invalid");
+            $("#registerTelephoneNumber").removeClass("is-valid").addClass("is-invalid");
         }
     })
 
-
+//------------------------------------------------------------------------------------------------------------------
+$('body').on('click','.errors>.errors-header>i',function(){
+    $('.errors').css('display','none');
+})
 
 
 })

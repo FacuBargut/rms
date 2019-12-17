@@ -1,5 +1,6 @@
 <?php
       include "php/class/usuario.php";
+      include "php/class/producto.php";
       session_start();
 ?>
 
@@ -76,33 +77,24 @@
       </div>
       
       <?php 
-      for($i=0;$i<4;$i++){
+
+      $productos = producto::getProducts();
+
+      
+      // echo($productos[0]->nombre);
+
+      for($i=0;$i<count($productos);$i++){
+        // echo $productos[$i];
       ?>
           <div class="card">
-              <img src="img/productos/guitarras/guitar.jpg" class="card-img-top">
+              <img src="<?php echo $productos[$i]->imagen; ?>" class="card-img-top">
               <div class="card-body">
-                  <h5 class="card-title">Nombre del instrumento</h5>
-                  <p>Precio del instrumento</p>
-                  <a href="#" class="btn btn-primary btn-block">Ver más</a>
+                  <h5 class="card-title"><?php  echo $productos[$i]->nombre; ?></h5>
+                  <p>$ <?php echo $productos[$i]->precio; ?></p>
+                  <a href="producto-detalle.php?instrument="<?php var_dump($productos[$i]);?> class="btn btn-primary btn-block">Ver más</a>
               </div>
           </div>
-          <div class="card">
-              <img src="img/productos/guitarras/ibanes.jpg" class="card-img-top">
-              <div class="card-body">
-                  <h5 class="card-title">Nombre del instrumento</h5>
-                  <p>Precio del instrumento</p>
-                  <a href="#" class="btn btn-primary btn-block">Ver más</a>
-              </div>
-          </div>
-          <div class="card">
-              <img src="img/productos/guitarras/fender.jpg" class="card-img-top">
-              <div class="card-body">
-                  <h5 class="card-title">Nombre del instrumento</h5>
-                  <p>Precio del instrumento</p>
-                  <a href="#" class="btn btn-primary btn-block">Ver más</a>
-              </div>
-          </div>
-          <?php
+      <?php
   }
   ?>
       

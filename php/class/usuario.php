@@ -40,7 +40,7 @@ class usuario {
 
     public static function loginUser($email, $password){
         
-        include "../conexion.php";
+        include "php/script/conexion.php";
         $stmt = $conn->query("SELECT * FROM Usuarios WHERE email = '$email' and password = '$password'");
         $result = $stmt->num_rows;
 
@@ -66,11 +66,11 @@ class usuario {
     public static function createUser($name,$surname,$mail,$password,$active,$admin,$telephone){
         include "../conexion.php";
         if($stmt = $conn->query("INSERT INTO Usuarios (nombre, apellido, email, password, activo, admin, telefono) VALUES ('$name', '$surname', '$mail', '$password', '$active', '$admin', '$telephone')") == TRUE){
-            echo "Usuario registrado correctamente";
-            exit;
+            return "Usuario registrado correctamente";
+            
         }else{
-            echo "Error, mostrando consulta: "."INSERT INTO Usuarios (nombre, apellido, email, 'password', activo, 'admin', telefono) VALUES ('$name', '$surname', '$mail', '$password', '$active', '$admin', '$telephone')";
-            exit;
+            return "Error, mostrando consulta: "."INSERT INTO Usuarios (nombre, apellido, email, 'password', activo, 'admin', telefono) VALUES ('$name', '$surname', '$mail', '$password', '$active', '$admin', '$telephone')";
+            
         }
 
     }

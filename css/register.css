@@ -55,9 +55,29 @@ body {
 
 .errors {
     margin-top: 20%;
-    background: red;
+    background: #dc3545;
     padding: 25px;
     color: white;
     list-style: none;
     display: none;
+}
+
+.errors>.errors-header>i{
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.errors>.errors-header>i:hover{
+color: #c5c5c5;
+}
+
+
+
+.errors>.errors-header{
+    text-align: right;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.17)
+}
+
+.errors>.errors-body{
+    margin-top: 5%;
 }

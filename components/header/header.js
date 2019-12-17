@@ -16,8 +16,8 @@ $(document).ready(function(){
     //#endregion 
 
     //#region click en el boton de logeo
-    $('body').on("click","#loginForm>button",function(){
-        
+    $('body').on("click","#loginForm>button",function(e){
+        e.preventDefault();
         //Validacion del formulario de logeo
 
         let mail = $('#LoginEmail').val();
@@ -40,7 +40,6 @@ $(document).ready(function(){
             url:'./php/script/usuario/loguearUsuario.php',
             data: {datos},
             success: function(data){
-                alert();
                 console.log(data);
                 switch(data.trim()){
                     case "Usuario no encontrado":

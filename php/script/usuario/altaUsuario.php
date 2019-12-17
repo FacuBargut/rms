@@ -3,7 +3,7 @@
         include "../../class/usuario.php";
 
 
-        print_r ($_POST['user']);
+        // print_r ($_POST['user']);
 
         //Declaracion de variables
         $name = trim($_POST['user']['name']);
@@ -48,10 +48,14 @@
 
         $createUser = usuario::createUser($name,$surname,$mail,$password,$active,$admin,$telephone);
 
-        if($createUser == "Usuario registrado correctamente"){
-            echo $createUser;
+        if(trim($createUser) == "Usuario registrado correctamente"){
+            $mensaje = "Mensaje de prueba";
+            mail($mail,'Alta de usuario',$mensaje);
+
+            echo "Enviando mail";
 
         }else{
+            // echo "entra aca";
             echo $createUser;
         }
 

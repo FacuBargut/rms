@@ -61,6 +61,9 @@
                   <button class="btn btn-primary" id="registerUser" type="submit">Registrar</button>
                 </form>
                 <div class="errors">
+                  <div class="errors-header"><i class="fas fa-times"></i></div>
+                  <div class="errors-body">
+                  </div>
                 </div>
         </section>
 
