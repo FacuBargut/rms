@@ -8,53 +8,56 @@ body {
 .wrapper {
     display: grid;
     grid-template: 200px 1fr 300px / 1fr;
-    grid-template-areas: "header"
-                         "main"
-                         "footer";
+    grid-template-areas: "header" "main" "footer";
 }
 
-.header{
+.header {
     grid-area: header;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    grid-template-areas: "header-top"
-                        "header-bottom";
+    grid-template-areas: "header-top" "header-bottom";
 }
 
-.main{
+.main {
     grid-area: main;
     width: 40%;
 }
 
-.main > form > button {
+.main>form>button {
     float: right;
 }
 
-.main > form > div:nth-child(6)>label:nth-child(1){
+.main>form>div:nth-child(6)>label:nth-child(1) {
     display: block;
 }
 
-.main > form > div:nth-child(6)>input{
-
+.main>form>div:nth-child(6)>input {
     display: inline-block;
 }
 
-.main > form > div:nth-child(6)>input:nth-child(2){
-
+.main>form>div:nth-child(6)>input:nth-child(2) {
     width: 20%;
-} 
-.main > form > div:nth-child(6)>input:nth-child(3){
+}
 
+.main>form>div:nth-child(6)>input:nth-child(3) {
     width: 79%;
-} 
+}
 
-.footer{
+.footer {
     grid-area: footer;
     display: grid;
-    grid-template-columns: repeat(3, 1fr) ;
+    grid-template-columns: repeat(3, 1fr);
     background: black;
-    
 }
 
 
+/* Errores */
 
+.errors {
+    margin-top: 20%;
+    background: red;
+    padding: 25px;
+    color: white;
+    list-style: none;
+    display: none;
+}

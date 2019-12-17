@@ -60,6 +60,8 @@
   
                   <button class="btn btn-primary" id="registerUser" type="submit">Registrar</button>
                 </form>
+                <div class="errors">
+                </div>
         </section>
 
         <div class="footer">

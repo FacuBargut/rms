@@ -23,37 +23,50 @@ $(document).ready(function() {
         var codArea = $('#registerCodArea').val();
         var telephoneNumber = $('#registerTelephoneNumber').val();
 
+        var errors = [];
+
 
         if (name.trim() === "" && surname.trim() === "" || mail.trim() === "" ||
             password.trim() === "" || passwordConfirmed.trim() === "" || codArea.trim() === "" ||
             telephoneNumber.trim() === "") {
-            console.log("Los campos deben estar completos")
-
-        } else if (!regex.test(mail.trim())) {
-            console.log("El mail no esta en un formato correcto");
+            let error = "Todos los campos deben estar completos";
+            errors.push(error)
+                // console.log("Los campos deben estar completos")
+        }
+        if (!regex.test(mail.trim())) {
             $('#registerEmail').val('');
             $('#registerEmail').focus();
             $("#registerEmail").addClass("is-invalid");
-
-        } else if (password != passwordConfirmed) {
+            let error = "El mail no esta en un formato correcto"
+            errors.push(error);
+        }
+        if (password != passwordConfirmed) {
             $('#registerPassword1').val('');
             $('#registerPassword2').val('');
             $('#registerPassword1').focus();
             $("#registerPassword1").addClass("is-invalid");
             $("#registerPassword2").addClass("is-invalid");
-            console.log("Las contraseñas no coinciden")
-        } else if (codArea.length < 3) {
-            console.log("El codigo de area no puede tener menos de 3 digitos");
+            let error = "Las contraseñas no coinciden";
+            errors.push(error);
+        }
+        if (codArea.length < 3) {
+            // console.log("");
             $('#registerCodArea').val('')
             $('#registerCodArea').focus();
             $("#registerCodArea").addClass("is-invalid");
-        } else if (telephoneNumber.length != 7) {
-            console.log("El numero de telefono debe tener 7 digitos");
+            let error = "El codigo de area no puede tener menos de 3 digitos"
+            errors.push(error);
+        }
+        if (telephoneNumber.length != 7) {
+            // console.log("El numero de telefono debe tener 7 digitos");
             $("#telephoneNumber").val('');
             $("#telephoneNumber").focus();
             $("#telephoneNumber").addClass("is-invalid");
-        } else {
+            let error = "El numero de telefono debe tener 7 digitos";
+            errors.push(error)
+        }
 
+        if (errors.length == 0) {
             var user = {
                 name: name,
                 surname: surname,
@@ -77,16 +90,24 @@ $(document).ready(function() {
             })
 
 
+
+
+
+        } else {
+
+            console.log("Mostrando errores: ");
+            errors.forEach(element => {
+                $('.errors').append("<li>" + element + "</li>")
+                $('.errors').css("display", "block");
+                console.log(element);
+            });
+            errors.length = 0;
+
         }
-
-
-
-
-
-
-
-
     })
+
+
+    //---------------------------------------------------------------------------------------------
     $("#registerName").blur(function() {
         var name = $('#registerName').val();
         if (name.trim() === "") {
@@ -159,7 +180,7 @@ $(document).ready(function() {
         if (telephoneNumber != "" && telephoneNumber.length == 7 && numeros.test(telephoneNumber.trim())) {
             $("#registerTelephoneNumber").removeClass("is-invalid").addClass("is-valid");
         } else {
-            $("#registerTelephoneNumber").removeClass("is-valid").addClass("is-invalid");
+            $("#registerTelephoneNusmber").removeClass("is-valid").addClass("is-invalid");
         }
     })
 
