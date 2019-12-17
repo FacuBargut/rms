@@ -52,4 +52,27 @@ class usuario {
         return $user; 
     }
 
+    public static function searchUserByEmail ($email){
+        include "../conexion.php";
+        $stmt = $conn->query("SELECT * FROM Usuarios WHERE email = '$email'");
+        $result = $stmt->num_rows;
+
+        if($result > 0){
+            return "Usuario ya existe";
+            exit;
+        }
+    }
+
+    public static function createUser($name,$surname,$mail,$password,$active,$admin,$telephone){
+        include "../conexion.php";
+        if($stmt = $conn->query("INSERT INTO Usuarios (nombre, apellido, email, password, activo, admin, telefono) VALUES ('$name', '$surname', '$mail', '$password', '$active', '$admin', '$telephone')") == TRUE){
+            echo "Usuario registrado correctamente";
+            exit;
+        }else{
+            echo "Error, mostrando consulta: "."INSERT INTO Usuarios (nombre, apellido, email, 'password', activo, 'admin', telefono) VALUES ('$name', '$surname', '$mail', '$password', '$active', '$admin', '$telephone')";
+            exit;
+        }
+
+    }
+
 }
