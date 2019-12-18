@@ -81,7 +81,6 @@
       $productos = producto::getProducts();
 
       
-      // echo($productos[0]->nombre);
 
       for($i=0;$i<count($productos);$i++){
         // echo $productos[$i];
@@ -91,7 +90,7 @@
               <div class="card-body">
                   <h5 class="card-title"><?php  echo $productos[$i]->nombre; ?></h5>
                   <p>$ <?php echo $productos[$i]->precio; ?></p>
-                  <a href="producto-detalle.php?instrument="<?php var_dump($productos[$i]);?> class="btn btn-primary btn-block">Ver más</a>
+                  <a href="producto-detalle?intrument=<?php echo $productos[$i]->id;?>" class="btn btn-primary btn-block">Ver más</a>
               </div>
           </div>
       <?php

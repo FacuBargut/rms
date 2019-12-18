@@ -13,6 +13,6 @@
     }else{
        session_start();
        $oUser = new usuario ($user->nombre, $user->apellido, $user->email, $user->password, $user->activo, $user->admin, $user->telefono);
-       $_SESSION['user'] = $oUser;
-       echo "Sesión iniciada";
+       $_SESSION['usuario'] = $oUser;
+       echo trim("Sesión iniciada");
     }

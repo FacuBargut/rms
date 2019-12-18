@@ -61,9 +61,21 @@ class producto {
         }
 
         return $array_instruments;
+    }
 
+    public static function getProductById($idProducto){
+        include "php/script/conexion.php";
 
+        if($result = $conn->query("SELECT * FROM Instrumentos WHERE Id='$idProducto'")){
+            $row = $result->fetch_object();
+            return $row;
 
+        }else{
+            return "No hay producto";
+            
+        }
+
+        
     }
 
 

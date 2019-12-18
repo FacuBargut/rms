@@ -49,7 +49,7 @@ $(document).ready(function(){
                         $('#LoginEmail').focus();
                         break;
                     case "Sesión iniciada":
-                        // location.reload();
+                        location.reload();
                     break;
                 }
             }
@@ -77,7 +77,23 @@ $(document).ready(function(){
     })
     //#endregion
 
-
+    //#region click en cerrar sesion
+    $('#closeSession').click(function(){
+        $.ajax({
+            url: './php/script/usuario/cerrarSesion.php',
+            success: function(data){
+                switch(data){
+                    case "Sesion cerrada":
+                        location.reload();
+                        break;
+                    case "Ocurrio un problema":
+                        alert(data);
+                        break;
+                }
+            }
+        })
+    })
+    //#endregion
 
 })
 

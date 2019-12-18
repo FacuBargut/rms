@@ -40,7 +40,7 @@ class usuario {
 
     public static function loginUser($email, $password){
         
-        include "php/script/conexion.php";
+        include "../conexion.php";
         $stmt = $conn->query("SELECT * FROM Usuarios WHERE email = '$email' and password = '$password'");
         $result = $stmt->num_rows;
 

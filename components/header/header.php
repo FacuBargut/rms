@@ -21,7 +21,7 @@
                 ?>
                 <li class="nav-item nav-item-loggedUser dropdown">
                     <a class="nav-link text-white" href="#" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
-                        <?php echo substr($_SESSION['user']->getName(), 0, 1).substr($_SESSION['user']->getSurname(), 0, 1) ?>
+                        <?php echo substr($_SESSION['usuario']->getName(), 0, 1).substr($_SESSION['usuario']->getSurname(), 0, 1) ?>
                         
                     </a>
                     <div class="dropdown-menu menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" >
@@ -29,16 +29,16 @@
 
                           <h5>
                               <span class="nav-item nav-item-loggedUser-min dropdown">
-                                  <?php echo substr(trim($_SESSION['user']->getName()), 0, 1).substr(trim($_SESSION['user']->getSurname()), 0, 1) ?>
+                                  <?php echo substr(trim($_SESSION['usuario']->getName()), 0, 1).substr(trim($_SESSION['usuario']->getSurname()), 0, 1) ?>
                               </span>
-                              <?php echo trim($_SESSION['user']->getName())." ".trim($_SESSION['user']->getSurname()); ?>
+                              <?php echo trim($_SESSION['usuario']->getName())." ".trim($_SESSION['usuario']->getSurname()); ?>
                           </h5>
-                          <p style="margin-left:17%;"><?php echo $_SESSION['user']->getEmail(); ?></p>
+                          <p style="margin-left:17%;"><?php echo $_SESSION['usuario']->getEmail(); ?></p>
                           
                         </a>
                         <a class="dropdown-item" href="#">Historial de compras</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        <a class="dropdown-item" id="closeSession" href="#">Cerrar sesión</a>
                     </div>       
                 </li>
                 <?php
@@ -103,11 +103,22 @@
       </div>
       <hr>
       <div class="charter-body">
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+          <?php
+            if(isset($_SESSION['carrito'])){
+              ?>
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              
+              <?php
+            }else{
+          ?>
+            <h3>No hay productos en el carro de compras</h3>
+          <?php
+          }
+          ?>
       </div>
   </div>
 </div>
