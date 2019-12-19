@@ -61,28 +61,33 @@ $(document).ready(function(){
     
     $('body').on("click", ".nav-item-shopping-cart",function(){
         $('.charter-body').html('');
+        $('body').css("overflow","hidden");
         $('.modal-chart').fadeIn(200, function(){
             
             $.ajax({
                 type:'POST',
                 url: './php/script/producto/actualizarCarroCompras.php',
                 success:function(res){
-                    let data = JSON.parse(res);
-                    console.log(data);
-
-                    
-                    
-                    for(let i= 0; i<= data.length-1; i++){
-                        
-                        $('.charter-body>ul').append(`<li class="productoEnCarro">
-                                                     <img src="${data[i].img}">
-                                                        ${data[i].nombre}
-                                                     </li>`);
-                    
-                        
-                        
-                    }
-
+                    console.log(res);
+                    if(res.trim() === "Carrito de compras vacio"){
+                        $('.charter-body').html('<p>Carrito de compras vacío</p>');
+                    }else{
+                            let data = JSON.parse(res);
+                            console.log(data);
+                            for(let i= 0; i<= data.length-1; i++){
+                                $('.charter-body').append(`<div class="item-chart">
+                                                                <div class="item-chart-img"><img src="${data[i].img}"></div>
+                                                                <div class="item-chart-data">
+                                                                    <p>${data[i].nombre}</p>
+                                                                    <p>${data[i].precio}</p>
+                                                                    <p>${data[i].total}</p>
+                                                                    <p><input type="number" value="${data[i].cantidad}" ></p>
+                                                                    </div>
+                                                                
+                                                           </div>`);
+                             }
+                             $('#deleteChart').prop('disabled',false);
+                }      
                 }
             })
 
@@ -99,6 +104,7 @@ $(document).ready(function(){
         }else{
             $('.modal-chart').fadeOut(200);
             $('.charter-wrapper').css("right","-30%");
+            $('body').css("overflow","auto");
         }
     })
     //#endregion
@@ -118,6 +124,23 @@ $(document).ready(function(){
                 }
             }
         })
+    })
+    //#endregion
+
+    //#region click en borrar carrito
+    $('body').on("click",'#deleteChart',function(){
+
+        $.ajax({
+            type:'POST',
+            url: './php/script/producto/borrarCarroCompras.php',
+            success: function(data){
+                if (data.trim() == "Carrito eliminado"){
+                    $('.charter-wrapper>.charter-body').html('<p>Carrito de compras vacío</p>');
+                    $('#deleteChart').prop('disabled',true);
+                }
+            }
+        })
+        
     })
     //#endregion
 

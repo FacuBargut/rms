@@ -104,19 +104,20 @@
       <hr>
       <div class="charter-body">
           <?php
-            if(isset($_SESSION['carrito'])){
+            if(!isset($_SESSION['carrito'])){
               ?>
-              <ul>
 
-              </ul>
-              
-              <?php
+          <?php
             }else{
           ?>
             <h3>No hay productos en el carro de compras</h3>
           <?php
           }
           ?>
+      </div>
+      <div class="charter-footer">
+          <a disabled href="./chart" class="btn btn-primary">Ir al carrito</a>
+          <button disabled class="btn btn-danger" id="deleteChart">Borrar carrito</button>
       </div>
   </div>
 </div>

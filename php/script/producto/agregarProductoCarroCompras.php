@@ -13,8 +13,5 @@
 
         echo 'Producto agregado exitosamente';
 
-  
-
-
 
 ?>

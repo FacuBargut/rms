@@ -60,12 +60,48 @@ nav > ul.navbar-nav > .nav-item-loggedUser, .nav-item-loggedUser-min{
     cursor: auto;
 }
 
-.modal-chart > .charter-wrapper > .charter-body > ul > li {
-    list-style: none;
+.modal-chart > .charter-wrapper > .charter-body{
+    height: 400px;
+    overflow: auto;
 }
 
-.modal-chart > .charter-wrapper > .charter-body > ul > li > img {
-    width:20%;
+.modal-chart > .charter-wrapper > .charter-body > .item-chart > img{
+    width: 100%;
 }
 
+
+.modal-chart > .charter-wrapper > .charter-footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.modal-chart > .charter-wrapper > .charter-footer > button{
+     width: 49%;
+}
+
+
+.item-chart{
+    display: grid;
+    grid-template: 40% / repeat(2, 1fr);
+}
+
+.item-chart > .item-chart-img {
+    position: relative;
+}
+
+.item-chart > .item-chart-img > img {
+    width: 100%;
+}
+
+.item-chart > .item-chart-data {
+    display: grid;
+    grid-template: repeat(5,1fr)/1fr;   
+}
+
+.item-chart > .item-chart-data> p {
+    margin:0;
+    font-size: 10px;
+}
 

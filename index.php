@@ -2,6 +2,7 @@
       include "php/class/usuario.php";
       include "php/class/producto.php";
       session_start();
+      
 ?>
 
 <!DOCTYPE html>
@@ -23,14 +24,11 @@
 </head>
 
 <body>
-
 <!-- header -->
-    <div class="wrapper">
-
-        <div class="header">
-            <?php include "components/header/header.php"; ?>
-        </div>
-        
+  <div class="wrapper">
+    <div class="header">
+      <?php include "components/header/header.php"; ?>
+    </div>
         
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -99,10 +97,10 @@
       
   </section>
 
-        <div class="footer">
-            <?php include "components/footer/footer.php"; ?>
-        </div>
+    <div class="footer">
+      <?php include "components/footer/footer.php"; ?>
     </div>
+</div>
 
     <?php 
          include "components/modal/modal-usuario.php"

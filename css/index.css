@@ -35,7 +35,7 @@ body {
 .main {
     grid-area: main;
     display: grid;
-    grid-template: 4% 1fr / repeat(3, 1fr);
+    grid-template: 10% 1fr / repeat(3, 1fr);
 }
 
 .main>.offerTittle {
