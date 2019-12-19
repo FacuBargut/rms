@@ -107,9 +107,7 @@
             if(isset($_SESSION['carrito'])){
               ?>
               <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+
               </ul>
               
               <?php

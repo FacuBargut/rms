@@ -45,16 +45,21 @@ $(document).ready(function() {
             nombre: $('#nombreProducto').text(),
             cantidad : $('#cantidadProducto').val(),
             precio : precio,
-            img : $('#imgProducto').attr('src')
+            img : $('#imgProducto').attr('src'),
+            total: $('#total').val()
         }
 
         console.log(producto);
 
 
-        // $.ajax({
-        //     url:'agregarProductoCarroCompras',
-        //     data:
+        $.ajax({
+            type:'POST',
+            url:'./php/script/producto/agregarProductoCarroCompras.php',
+            data: {producto},
+            success:function(data){
+                console.log(data);
+            }
 
-        // })
+        })
     })
 })

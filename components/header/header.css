@@ -59,3 +59,13 @@ nav > ul.navbar-nav > .nav-item-loggedUser, .nav-item-loggedUser-min{
     transition: all ease .3s;
     cursor: auto;
 }
+
+.modal-chart > .charter-wrapper > .charter-body > ul > li {
+    list-style: none;
+}
+
+.modal-chart > .charter-wrapper > .charter-body > ul > li > img {
+    width:20%;
+}
+
+

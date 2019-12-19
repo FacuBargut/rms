@@ -60,7 +60,33 @@ $(document).ready(function(){
     //#region click en el icono de carro de compras
     
     $('body').on("click", ".nav-item-shopping-cart",function(){
+        $('.charter-body').html('');
         $('.modal-chart').fadeIn(200, function(){
+            
+            $.ajax({
+                type:'POST',
+                url: './php/script/producto/actualizarCarroCompras.php',
+                success:function(res){
+                    let data = JSON.parse(res);
+                    console.log(data);
+
+                    
+                    
+                    for(let i= 0; i<= data.length-1; i++){
+                        
+                        $('.charter-body>ul').append(`<li class="productoEnCarro">
+                                                     <img src="${data[i].img}">
+                                                        ${data[i].nombre}
+                                                     </li>`);
+                    
+                        
+                        
+                    }
+
+                }
+            })
+
+
             $('.charter-wrapper').css("right","0%");
         })
     })

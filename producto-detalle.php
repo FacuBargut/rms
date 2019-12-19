@@ -59,7 +59,7 @@
                 <h2>$ <input disabled id="precioProducto" type="text" value="<?php echo number_format($Producto->precio,2,",",".");?>"></h2>
                 <div>
                     <label for="Cantidad">Cantidad</label>
-                    <input type="number" id="cantidadProducto" value="0">
+                    <input type="number" id="cantidadProducto" value="1">
                     <button id="addProduct" class="btn btn-primary">Añadir al carrito</button>
                     <label for="Total">Total $</label>
                     <input id="total" type="text" disabled>
