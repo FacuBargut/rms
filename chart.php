@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +33,9 @@
         <?php
 
           if(!isset($_SESSION['carrito'])){
-          ?><h1>Carrito de compras vacio</h1><?php
+          ?>
+            <h1>Carrito de compras vacio</h1>
+          <?php
           }else{
 
         ?>
@@ -46,7 +52,7 @@
               </thead>
               <tbody>
                     <?php
-                        for($i=0;$i<=count($_SESSION['carrito']);$i++){
+                        for($i=0;$i<count($_SESSION['carrito']);$i++){
                     ?>
                       <tr>
                         <td><img src="<?php echo $_SESSION['carrito'][$i]['img']; ?>" alt="">
@@ -64,15 +70,23 @@
           }
         ?>
         </section>
+
+        <div class="action-buttons">
+                <button id="deleteChart"
+                        class="btn btn-danger
+                        <?php if(!isset($_SESSION['carrito'])){
+                          ?>disabled<?php } ?>
+                        ">Vaciar carro
+                </button>
+        </div>
+
+
         <div class="footer">
             <?php include "components/footer/footer.php"; ?>
         </div>
     </div>
 
     <?php 
-
-        print_r($_SESSSION['carrito']);
-
          include "components/modal/modal-usuario.php"
     ?>
 

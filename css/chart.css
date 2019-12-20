@@ -7,9 +7,10 @@ body {
 
 .wrapper {
     display: grid;
-    grid-template: 200px 1fr 300px / 1fr;
+    grid-template: 200px 1fr 1fr 300px / 1fr;
     grid-template-areas: "header"
                          "main"
+                         "action-buttons"
                          "footer";
 }
 
@@ -23,8 +24,6 @@ body {
 .main {
     display: grid;
     grid-area: main;
-    
-
 }
 
 table>thead>tr>th:nth-last-child(1){
