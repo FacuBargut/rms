@@ -45,8 +45,21 @@
               }
         ?>
         <li class="nav-item nav-item-shopping-cart">
-            <a class="nav-link text-white" href="#">
-                <i class="fas fa-shopping-cart"></i>
+            <a class="nav-link text-white" href="./chart">
+                <i class="fas fa-shopping-cart">
+                  <?php 
+                    if(isset($_SESSION['carrito'])){
+                    ?>
+                      <span class="cantItemChart">
+                      <?php
+                        echo count($_SESSION['carrito']);
+                      ?>
+                      </span>
+                    <?php
+                    }
+                  ?>
+                  
+                </i>
             </a>       
         </li>
     </ul>
@@ -95,29 +108,3 @@
         </div>
       </nav>
 
-
-<div class="modal-chart">
-  <div class="charter-wrapper">
-      <div class="title-wrapper">
-          <h1>Carrito de compras</h1>
-      </div>
-      <hr>
-      <div class="charter-body">
-          <?php
-            if(!isset($_SESSION['carrito'])){
-              ?>
-
-          <?php
-            }else{
-          ?>
-            <h3>No hay productos en el carro de compras</h3>
-          <?php
-          }
-          ?>
-      </div>
-      <div class="charter-footer">
-          <a disabled href="./chart" class="btn btn-primary">Ir al carrito</a>
-          <button disabled class="btn btn-danger" id="deleteChart">Borrar carrito</button>
-      </div>
-  </div>
-</div>

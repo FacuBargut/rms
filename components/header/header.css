@@ -32,6 +32,27 @@ nav > ul.navbar-nav > .nav-item-loggedUser, .nav-item-loggedUser-min{
     margin: 0 auto;
 }
 
+li.nav-item-shopping-cart{
+    position:relative;
+}
+
+li.nav-item-shopping-cart a i{
+    position:static;
+}
+
+li.nav-item-shopping-cart a i span{
+    width: 47%;
+    height: 40%;
+    background: red;
+    top: 0%;
+    position: absolute;
+    border-radius: 25px;
+    right: 0;
+    font-size: 23px;
+    text-align: center;
+}
+
+
 
 .modal-chart{
     position: absolute;

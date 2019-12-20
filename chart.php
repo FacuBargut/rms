@@ -1,12 +1,3 @@
-<?php
-    include "php/class/usuario.php";
-    session_start();
-    if(!isset($_SESSION['carrito'])){
-      echo "Usted no deberia estar aquí";
-    }else{
-
-    
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +25,14 @@
             <?php include "components/header/header.php"; ?>
         </div>
         <section class="main">
+
+        <?php
+
+          if(!isset($_SESSION['carrito'])){
+          ?><h1>Carrito de compras vacio</h1><?php
+          }else{
+
+        ?>
         <table class="table">
               <thead>
                 <tr>
@@ -46,31 +45,34 @@
                 </tr>
               </thead>
               <tbody>
-                      <?php
-                            for($i=0;$i<=count($_SESSION['carrito']);$i++){
-                      ?>
-                        <tr>
-                          <td><img src="<?php echo $_SESSION['carrito'][$i]['img']; ?>" alt="">
-                          <td><p><?php echo $_SESSION['carrito'][$i]['nombre']; ?></p></td>
-                          <td><?php echo $_SESSION['carrito'][$i]['cantidad']; ?></td>
-                          <td><?php echo $_SESSION['carrito'][$i]['total']; ?></td>
-                          <td><button class="btn btn-danger">X</button></td>
-                        </tr>
-                      <?php
+                    <?php
+                        for($i=0;$i<=count($_SESSION['carrito']);$i++){
+                    ?>
+                      <tr>
+                        <td><img src="<?php echo $_SESSION['carrito'][$i]['img']; ?>" alt="">
+                        <td><p><?php echo $_SESSION['carrito'][$i]['nombre']; ?></p></td>
+                        <td><?php echo $_SESSION['carrito'][$i]['cantidad']; ?></td>
+                        <td><?php echo $_SESSION['carrito'][$i]['total']; ?></td>
+                        <td><button class="btn btn-danger">X</button></td>
+                      </tr>
+                    <?php
                       }
-                      ?>
+                    ?>
              </tbody>
         </table>
+        <?php
+          }
+        ?>
         </section>
-          <?php
-              print_r($_SESSION['carrito']);
-          ?>
         <div class="footer">
             <?php include "components/footer/footer.php"; ?>
         </div>
     </div>
 
     <?php 
+
+        print_r($_SESSSION['carrito']);
+
          include "components/modal/modal-usuario.php"
     ?>
 
@@ -82,7 +84,5 @@
 <script src="components/header/header.js"></script>
 </body>
 </html>
-<?php
-  }
-?>
+
 
