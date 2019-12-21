@@ -47,16 +47,24 @@
         <li class="nav-item nav-item-shopping-cart">
             <a class="nav-link text-white" href="./chart">
                 <i class="fas fa-shopping-cart">
-                  <?php 
-                    if(isset($_SESSION['carrito'])){
-                    ?>
-                      <span class="cantItemChart">
+                  <span class="cantItemChart"
+                        style="display:<?php
+                               if(isset($_SESSION['carrito'])){
+                                 ?>block<?php
+                               }else{
+                                  ?>none<?php   
+                               } ?>
+                              ">
                       <?php
-                        echo count($_SESSION['carrito']);
+                        if(isset($_SESSION['carrito'])){
+                          echo count($_SESSION['carrito']);
+                        }else{
+                          ?>0<?php
+                        }
                       ?>
                       </span>
                     <?php
-                    }
+                    
                   ?>
                   
                 </i>

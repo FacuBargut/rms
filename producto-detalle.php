@@ -42,7 +42,7 @@
                     <img id="imgProducto" src="<?php echo $Producto->imagen;?>" alt="">
                 </div>
             </div>
-            <div class="details-producto">
+            <div class="details-producto" data-producto="<?php echo $Producto->id; ?>" >
                 <h1 id="nombreProducto"><?php echo $Producto->nombre;?></h1>
                 <h4 style="color:black;"><?php echo $Producto->descripcion;?></h4>
                 <h2>$ <input disabled id="precioProducto" type="text" value="<?php echo number_format($Producto->precio,2,",",".");?>"></h2>
