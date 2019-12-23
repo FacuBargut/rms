@@ -20,8 +20,18 @@ $(document).ready(function() {
 
     //#region Eliminar producto del carro de compras
     $('.deleteProductChart').click(function(){
-        var idProduct = $('.deleteProductChart').data("id");
-        alert("Eliminar producto con id: ", idProduct);
+        var idProduct = $(this).data("id");
+        
+        $.ajax({
+            type: 'POST',
+            url: './php/script/producto/eliminarProductoCarroCompras.php',
+            data: {idProduct},
+            success: function(data){
+                console.log(data);
+            }
+        })
+
+        
         console.log(idProduct);
     })
     //#endregion
