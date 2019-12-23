@@ -10,7 +10,9 @@
             for($i=0;$i<$cantidadProductos;$i++){
                 // print_r($_SESSION['carrito'][0]['id']);
                 if($_SESSION['carrito'][$i]['id'] === $producto['id']){
-                    echo "Producto ya existe en el carro de compras";
+                    $suma = $_SESSION['carrito'][$i]['cantidad'] + $producto['cantidad'];
+                    $_SESSION['carrito'][$i]['cantidad'] += $producto['cantidad'];
+                    $_SESSION['carrito'][$i]['cantidad'] *= $producto['cantidad'];
                     exit;
                 }
 

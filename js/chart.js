@@ -18,4 +18,12 @@ $(document).ready(function() {
         //#endregion
 
 
+    //#region Eliminar producto del carro de compras
+    $('.deleteProductChart').click(function(){
+        var idProduct = $('.deleteProductChart').data("id");
+        alert("Eliminar producto con id: ", idProduct);
+        console.log(idProduct);
+    })
+    //#endregion
+
 })

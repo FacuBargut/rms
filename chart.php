@@ -57,9 +57,16 @@
                       <tr>
                         <td><img src="<?php echo $_SESSION['carrito'][$i]['img']; ?>" alt="">
                         <td><p><?php echo $_SESSION['carrito'][$i]['nombre']; ?></p></td>
+                        <td><?php echo $_SESSION['carrito'][$i]['precio']; ?></td>
                         <td><?php echo $_SESSION['carrito'][$i]['cantidad']; ?></td>
                         <td><?php echo $_SESSION['carrito'][$i]['total']; ?></td>
-                        <td><button class="btn btn-danger">X</button></td>
+                        <td>
+                          <button data-id="<?php echo $_SESSION['carrito'][$i]['id']; ?>"
+                                  class="btn btn-danger deleteProductChart"
+                                  >
+                                  X
+                          </button>
+                        </td>
                       </tr>
                     <?php
                       }
