@@ -2,6 +2,7 @@
 
 class usuario {
 
+    public $id;
     public $name;
     public $surname;
     public $email;
@@ -11,7 +12,8 @@ class usuario {
     public $telephone;
 
 
-    function __construct( $name, $surname, $email, $password, $active, $admin, $telephone) {
+    function __construct( $id, $name, $surname, $email, $password, $active, $admin, $telephone) {
+        $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;
         $this->email = $email;
@@ -36,6 +38,12 @@ class usuario {
     public function getPassword(){
         return $this->password;
     }
+
+    public function getID(){
+        return $this->id;
+    }
+
+
 
 
     public static function loginUser($email, $password){

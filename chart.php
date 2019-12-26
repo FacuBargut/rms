@@ -1,5 +1,8 @@
 <?php
+
+  include "php/class/usuario.php";
   session_start();
+  
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +87,12 @@
                         <?php if(!isset($_SESSION['carrito'])){
                           ?>disabled<?php } ?>
                         ">Vaciar carro
+                </button>
+                <button id="buyChart"
+                        class="btn btn-primary
+                        <?php if(!isset($_SESSION['carrito'])){
+                          ?>disabled<?php } ?>
+                        ">Comprar
                 </button>
         </div>
 

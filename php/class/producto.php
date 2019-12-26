@@ -93,4 +93,34 @@ class producto {
 
     }
 
+    public static function registerPurchase ($products, $userID){
+        include "../conexion.php";
+
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $fechaPedido = date('d-m-Y');
+        $fechaEntrega = date("d-m-Y", strtotime($fechaPedido."+ 10 days"));
+        $horaPedido = date('H:i:s');
+
+
+        echo $userID;
+        exit;
+
+
+        for($i=0;$i<=count($products);$i++){
+
+            // $result = $conn->query("INSERT INTO Pedidos (   'fecha-pedido',
+            //                                                 'hora-pedido',
+            //                                                 'total-pedido',
+            //                                                 'fecha-entrega',
+            //                                                 'id-usuario')
+            //                                                 VALUES ('$fechaPedido','$horaPedido','$TotalPedido','$FechaEntrega','$users['id']");
+            
+
+
+        }
+
+        
+
+    }
+
 }
