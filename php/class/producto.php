@@ -97,29 +97,25 @@ class producto {
         include "../conexion.php";
 
         date_default_timezone_set('America/Argentina/Buenos_Aires');
-        $fechaPedido = date('d-m-Y');
-        $fechaEntrega = date("d-m-Y", strtotime($fechaPedido."+ 10 days"));
+        $fechaPedido = date('d/m/Y');
+        $fechaEntrega = date("d/m/Y", strtotime($fechaPedido."+ 10 days"));
         $horaPedido = date('H:i:s');
+        $totalPedido = 0;
 
-
-        echo $userID;
-        exit;
-
-
-        for($i=0;$i<=count($products);$i++){
-
-            // $result = $conn->query("INSERT INTO Pedidos (   'fecha-pedido',
-            //                                                 'hora-pedido',
-            //                                                 'total-pedido',
-            //                                                 'fecha-entrega',
-            //                                                 'id-usuario')
-            //                                                 VALUES ('$fechaPedido','$horaPedido','$TotalPedido','$FechaEntrega','$users['id']");
+         for($i=0;$i<=count($products);$i++){
             
-
+            $result = $conn->query("INSERT INTO Pedidos (fechaPedido,horaPedido,totalPedido,fechaEntrega,idUsuario) VALUES (date('d/m/Y') ,NOW(),$totalPedido,$fechaEntrega, $userID)");
+        
+            if($result){
+                echo "Producto registrado";
+            }else{
+                echo "INSERT INTO Pedidos (fechaPedido,horaPedido,totalPedido,fechaEntrega,idUsuario) VALUES (date('d/m/Y') ,NOW(),$totalPedido,$fechaEntrega, $userID)";
+            }
+            // INSERT INTO Pedidos (fechaPedido,horaPedido,totalPedido,fechaEntrega,idUsuario) VALUES (27/12/2019,NOW(),0,06/01/2020, 7)
 
         }
 
-        
+        exit;
 
     }
 

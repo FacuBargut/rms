@@ -83,16 +83,16 @@
 
         <div class="action-buttons">
                 <button id="deleteChart"
-                        class="btn btn-danger
+                        class="btn btn-danger"
                         <?php if(!isset($_SESSION['carrito'])){
                           ?>disabled<?php } ?>
-                        ">Vaciar carro
+                        >Vaciar carro
                 </button>
                 <button id="buyChart"
-                        class="btn btn-primary
+                        class="btn btn-primary"
                         <?php if(!isset($_SESSION['carrito'])){
                           ?>disabled<?php } ?>
-                        ">Comprar
+                        >Comprar
                 </button>
         </div>
 
