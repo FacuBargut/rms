@@ -26,9 +26,6 @@ $(document).ready(function() {
             success: function(data) {
                 console.log(data);
                 if (data.trim() === "Usuario aun no se logeo") {
-                    // $('#myModal').on('shown.bs.modal', function () {
-                    //     $('#myInput').trigger('focus')
-                    //   })
                     $('#modal').modal('show');
                     $('.modal-title').text("Para finalizar la compra, necesita loguearse")
                     $('.modal-body').load("./components/forms/loginForm.php")
@@ -39,13 +36,7 @@ $(document).ready(function() {
                         $('#LoginEmail').focus();
                     }, 500);
                 }else if(data.trim() === "Usuario logueado"){
-                    $.ajax({
-                        type: 'POST',
-                        url: './php/script/producto/realizarCompra.php',
-                        success: function(data){
-                            console.log(data);
-                        }
-                    })
+                    window.location.href = "./checkout";
                 }
 
 

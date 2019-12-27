@@ -97,25 +97,57 @@ class producto {
         include "../conexion.php";
 
         date_default_timezone_set('America/Argentina/Buenos_Aires');
-        $fechaPedido = date('d/m/Y');
+        $fechaPedido = date('d-m-Y');
+
         $fechaEntrega = date("d/m/Y", strtotime($fechaPedido."+ 10 days"));
-        $horaPedido = date('H:i:s');
         $totalPedido = 0;
 
-         for($i=0;$i<=count($products);$i++){
-            
-            $result = $conn->query("INSERT INTO Pedidos (fechaPedido,horaPedido,totalPedido,fechaEntrega,idUsuario) VALUES (date('d/m/Y') ,NOW(),$totalPedido,$fechaEntrega, $userID)");
-        
-            if($result){
-                echo "Producto registrado";
-            }else{
-                echo "INSERT INTO Pedidos (fechaPedido,horaPedido,totalPedido,fechaEntrega,idUsuario) VALUES (date('d/m/Y') ,NOW(),$totalPedido,$fechaEntrega, $userID)";
-            }
-            // INSERT INTO Pedidos (fechaPedido,horaPedido,totalPedido,fechaEntrega,idUsuario) VALUES (27/12/2019,NOW(),0,06/01/2020, 7)
+        //Registro pedido
+        $query = "INSERT INTO Pedidos (fechaPedido,totalPedido,fechaEntrega,idUsuario) VALUES (STR_TO_DATE('$fechaPedido','%d-%m-%Y %h,%i,%s'),$totalPedido,'$fechaEntrega', $userID)";
 
+        $result = $conn->query($query);
+        
+        if($result){
+            return "Pedido registrado";
+        }else{
+            echo $query;
+            exit;
         }
 
         exit;
+
+    }
+
+    public static function getLastPurchase($userID){
+        include "../conexion.php";
+
+        if($result = $conn->query("SELECT * FROM Pedidos WHERE idUsuario = '7' ORDER BY fechaPedido LIMIT 1")){
+            $row = $result->fetch_object();
+            return $row;
+        }else{
+            return "No se encontro el ultimo pedido";            
+        }
+            
+    }
+
+    public static function registerPurchaseDetail($products, $idPedido){
+        include "../conexion.php";
+
+
+        for($i=0;$i<count($products); $i++){
+
+            $idInstrumento = $products[$i]['id'];
+            $result = $conn->query("INSERT INTO DetallePedidos (idPedido, idInstrumento) VALUES ('$idPedido','$idInstrumento')");
+
+            if(!$result){
+                // echo "Hay problemas al registrar el detalle de producto. Elimine el pedido: ".$idPedido." para que no haya inconsistencia de datos";
+                echo "INSERT INTO DetallePedidos (idPedido, idInstrumento) VALUES ('$idPedido','$idInstrumento')";
+                exit;
+            }
+        
+        }
+
+        echo "Detalles del pedido cargados correctamente";
 
     }
 
