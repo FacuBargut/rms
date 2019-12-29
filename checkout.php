@@ -33,7 +33,22 @@
         </div>
         <section class="main">
           <div class="information-entry">
-          Hola
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item">Dirección</li>
+                      <li class="breadcrumb-item">Envío</li>
+                      <li class="breadcrumb-item">Forma de pago</li>
+                      <li class="breadcrumb-item">Confirmar</li>
+                  </ol>
+              </nav>
+
+               <div id="checkout">
+                 
+               </div> 
+
+
+
+
           </div>
           <div class="chart-revision">
               <div class="wrapp-revision">

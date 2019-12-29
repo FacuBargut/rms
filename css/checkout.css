@@ -67,6 +67,17 @@ body {
 
 
 
+/* BreadCrumbs */
+.breadcrumb > .breadcrumb-item{
+    color: grey;
+}
+
+.breadcrumb > .breadcrumb-item:nth-child(1){
+    color: black;
+}
+
+
+
 
 
 
