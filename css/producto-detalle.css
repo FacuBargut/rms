@@ -24,6 +24,7 @@ body {
     display: grid;
     grid-area: main;
     grid-template: 1fr / 1fr 1fr;
+    position: relative;
 
 }
 
@@ -35,6 +36,64 @@ body {
 }
 
 
+
+
+/* //Detalles y cantidad para comprar */
+
+section.main > div.details-producto {
+    display: grid;
+    grid-template: repeat(5, 1fr) / 1fr;
+
+}
+
+.descripcionProducto{
+    padding: 10px 63px;
+}
+
+.descripcionProducto > h4{
+    font-family: arial;
+    color: grey;
+    font-size: 17px;
+}
+
+.precioProducto{
+    text-align: center;
+}
+
+.precioProducto > h2 > input{
+    background: none;
+    border: none;
+    color: black;
+} 
+
+.totalProducto{
+
+
+}
+
+.totalProducto > input {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 40px;
+}
+
+.totalProducto > label {
+    font-size: 40px;
+}
+
+
+
+
+
+#alertMessage{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    margin: 0;
+    display: none;
+}
 
 
 

@@ -16,6 +16,12 @@ $(document).ready(function() {
 
     //#region Cambiar Cantidad
     $('#cantidadProducto').change(function() {
+
+            if(this.value == 1){
+                $('#total').val(precio);
+                return;
+            }
+
             let nPrice = this.value * precio;
             let nPrice2 = nPrice.toFixed(2);
             let nPrice3 = nPrice2.replace(".", ",");
@@ -34,6 +40,10 @@ $(document).ready(function() {
             let total = first_part + "." + second_part;
 
             $('#total').val(total);
+
+
+
+
         })
         //#endregion
 
@@ -59,16 +69,31 @@ $(document).ready(function() {
             data: { producto },
             success: function(data) {
                 console.log(data);
-
+                var msg = "";
                 switch (data.trim()) {
                     case "Producto agregado exitosamente":
                         $('.cantItemChart').css("display", "block");
                         let cant = $('.cantItemChart').text();
                         let sumCant = parseInt(cant) + 1;
                         $('.cantItemChart').text(sumCant);
+                        msg = "Producto agregado al carrito de compras";
+                        $('#alertMessage').text(msg);
+                        $('#alertMessage').fadeIn();
+
+                        setTimeout(function(){
+                            $('#alertMessage').fadeOut();
+                          }, 2000);
                         console.log(sumCant);
                         break;
                     default:
+                        msg = "Cantidad del producto actualizado en el carro de compras";
+                        $('#alertMessage').text(msg);
+                        $('#alertMessage').fadeIn();
+
+                        setTimeout(function(){
+                            $('#alertMessage').fadeOut();
+                          }, 2000);
+
                         break;
 
                 }

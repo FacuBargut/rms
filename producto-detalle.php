@@ -42,17 +42,34 @@
                     <img id="imgProducto" src="<?php echo $Producto->imagen;?>" alt="">
                 </div>
             </div>
+
             <div class="details-producto" data-producto="<?php echo $Producto->id; ?>" >
-                <h1 id="nombreProducto"><?php echo $Producto->nombre;?></h1>
-                <h4 style="color:black;"><?php echo $Producto->descripcion;?></h4>
-                <h2>$ <input disabled id="precioProducto" type="text" value="<?php echo number_format($Producto->precio,2,",",".");?>"></h2>
-                <div>
+                <div class="nombreProducto">
+                    <h1 id="nombreProducto"><?php echo $Producto->nombre;?></h1>
+                </div>
+                <div class="descripcionProducto">
+                    <h4><?php echo $Producto->descripcion;?></h4>
+                </div>
+                <div class="precioProducto">
+                    <h2>$ <input disabled id="precioProducto" type="text" value="<?php echo number_format($Producto->precio,2,",",".");?>"></h2>
+                </div>
+                
+                <div class="cantidadProducto">
                     <label for="Cantidad">Cantidad</label>
                     <input type="number" id="cantidadProducto" value="1">
                     <button id="addProduct" class="btn btn-primary">Añadir al carrito</button>
+                    
+                </div>
+                
+                <div class="totalProducto">
                     <label for="Total">Total $</label>
                     <input id="total" type="text" disabled>
                 </div>
+
+            </div>
+
+            <div class="alert alert-success" id="alertMessage" role="alert">
+                
             </div>
         </section>
 
