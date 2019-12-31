@@ -57,15 +57,18 @@
               </thead>
               <tbody>
                     <?php
+                        $total = 0;
                         for($i=0;$i<count($_SESSION['carrito']);$i++){
+                            $total = $total + ($_SESSION['carrito'][$i]['cantidad']*$_SESSION['carrito'][$i]['precio']);
                     ?>
                       <tr>
                         <td><img src="<?php echo $_SESSION['carrito'][$i]['img']; ?>" alt="">
                         <td><p><?php echo $_SESSION['carrito'][$i]['nombre']; ?></p></td>
-                        <td><?php echo $_SESSION['carrito'][$i]['precio']; ?></td>
+                        <td>$ <?php echo number_format($_SESSION['carrito'][$i]['precio'],2,",","."); ?></td>
                         <td><?php echo $_SESSION['carrito'][$i]['cantidad']; ?></td>
-                        <td><?php echo $_SESSION['carrito'][$i]['total']; ?></td>
+                        <td>$ <?php echo number_format(($_SESSION['carrito'][$i]['cantidad']*$_SESSION['carrito'][$i]['precio']),2,",","."); ?></td>
                         <td>
+                        <!-- number_format($_SESSION['carrito'][$i]['total'],2,",",".") -->
                           <button data-id="<?php echo $_SESSION['carrito'][$i]['id']; ?>"
                                   class="btn btn-danger deleteProductChart"
                                   >
@@ -78,6 +81,11 @@
                     ?>
              </tbody>
         </table>
+        <div class="totalChart">
+
+        <!-- echo number_format($Producto->precio,2,",",".") -->
+             <h3>Total: $<input type="text" value="<?php echo number_format($total,2,",","."); ?>"></h3>
+        </div>
         <?php
           }
         ?>

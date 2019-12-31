@@ -17,7 +17,7 @@ $(document).ready(function() {
     //#region Cambiar Cantidad
     $('#cantidadProducto').change(function() {
 
-            if(this.value == 1){
+            if (this.value == 1) {
                 $('#total').val(precio);
                 return;
             }
@@ -51,13 +51,19 @@ $(document).ready(function() {
 
     //#region Agregar a Carrito
     $('#addProduct').click(function() {
+
+        var total = $('#total').val();
+        var total = total.replace(".", "")
+        var total = total.replace(",", ".")
+
+
         var producto = {
             id: $('.details-producto').data('producto'),
             nombre: $('#nombreProducto').text(),
             cantidad: $('#cantidadProducto').val(),
             precio: precio,
             img: $('#imgProducto').attr('src'),
-            total: $('#total').val()
+            total: total
         }
 
         console.log(producto);
@@ -80,9 +86,9 @@ $(document).ready(function() {
                         $('#alertMessage').text(msg);
                         $('#alertMessage').fadeIn();
 
-                        setTimeout(function(){
+                        setTimeout(function() {
                             $('#alertMessage').fadeOut();
-                          }, 2000);
+                        }, 2000);
                         console.log(sumCant);
                         break;
                     default:
@@ -90,9 +96,9 @@ $(document).ready(function() {
                         $('#alertMessage').text(msg);
                         $('#alertMessage').fadeIn();
 
-                        setTimeout(function(){
+                        setTimeout(function() {
                             $('#alertMessage').fadeOut();
-                          }, 2000);
+                        }, 2000);
 
                         break;
 
