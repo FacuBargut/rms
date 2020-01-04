@@ -83,4 +83,25 @@ class usuario {
 
     }
 
+
+    public static function saveAddress($address,$idUsuario){
+        include "../conexion.php";  
+
+        $direccion = $address['direccion'];
+        $numero = $address['numero'];
+        $departamento = $address['departamento'];
+        $localidad = $address['localidad'];
+        $codigoPostal = $address['codigoPostal'];
+        $provincia = $address['provincia'];
+
+        $stmt = "INSERT INTO Direcciones (direccion, numero, departamento, localidad, codigo_postal, provincia, id_usuario)
+                 VALUES('$direccion','$numero','$departamento','$localidad','$codigoPostal','$provincia',$idUsuario)";
+
+        if($query = $conn->query($stmt)){
+            return "Direccion cargadad con exito";
+        }else{
+            return "Error al registrar: ".$stmt;
+        }
+    }
+
 }
