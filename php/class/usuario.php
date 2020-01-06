@@ -98,10 +98,20 @@ class usuario {
                  VALUES('$direccion','$numero','$departamento','$localidad','$codigoPostal','$provincia',$idUsuario)";
 
         if($query = $conn->query($stmt)){
-            return "Direccion cargadad con exito";
+            return "Direccion ccargada con exito";
         }else{
             return "Error al registrar: ".$stmt;
         }
     }
 
+    public static function getAddress($idUsuario){
+        include "../conexion.php";
+        $array_direcciones = array();
+        if($stmt = $conn->query("SELECT * FROM Direcciones WHERE id_usuario IN ('$idUsuario',0)")){
+            while($row = $stmt->fetch_object()){
+                array_push($array_direcciones, $row);
+            }
+        }
+        return $array_direcciones; 
+    }
 }
