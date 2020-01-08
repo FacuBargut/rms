@@ -25,7 +25,7 @@
                         
                     </a>
                     <div class="dropdown-menu menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" >
-                        <a style="padding: 10px 9px;" class="dropdown-item" href="#">
+                        <a style="padding: 10px 9px;" class="dropdown-item" href="./perfil">
 
                           <h5>
                               <span class="nav-item nav-item-loggedUser-min dropdown">
