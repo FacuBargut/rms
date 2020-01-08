@@ -5,6 +5,15 @@ $(document).ready(function() {
 
     cargarDireccionesUsuario();
 
+    //Creo objeto de orden
+    var orden = {
+        direccion: "",
+        envio: "",
+        pago: "",
+    }
+
+
+
     //#region Nueva Direccion
     $('body').on('click', '#newAdress', function() {
             $('#checkout').load('./components/breadcrumbs/nuevaDireccion.php');
@@ -45,7 +54,7 @@ $(document).ready(function() {
                 success: function(data) {
                     console.log(data);
                     if (data.trim() == "Direccion cargada con exito") {
-                        $('#checkout').load('./components/breadcrumbs/direccion.php');
+                        cargarDireccionesUsuario()
                     }
                 }
             })
@@ -54,9 +63,75 @@ $(document).ready(function() {
         //#endregion
 
     //#region Cancelar guardado de direccion
-    $('body').on('click', '#cancel', function() {
+    $('body').on('click', '#toDireccion', function() {
             $('#checkout').load('./components/breadcrumbs/direccion.php');
         })
+    //#endregion
+
+
+    //#region Ir a forma de pago
+    $('body').on('click', '#toFormaPago', function() {
+
+        if(!$("input[name=direccion]").is(":checked")){
+            alert("Debe seleccionar alguna de las direcciones cargadas");
+            return false;
+        }
+        
+         $("input[name=direccion]").each(function (index){
+            if($(this).is(":checked")){
+                orden.direccion = $(this).val();
+                if($(this).val() === "Santa Fe 2141 - Rosario - Santa Fe"){
+                    orden.envio = "Retira en local";
+                }else{
+                    orden.envio = "Envío a cargo de la empresa";
+                }
+                $('.breadcrumb>li:nth-child(1)').css("color","grey");
+                $('.breadcrumb>li:nth-child(2)').css("color","black");
+                $('#checkout').load('./components/breadcrumbs/forma-pago.php');
+                return false;
+            }
+
+         })   
+
+         console.log(orden);
+        
+    })
+    //endregion
+
+        //#region Ir a confirmar
+        $('body').on('click', '#toConfirmar', function() {
+
+            if(!$("input[name=pago]").is(":checked")){
+                alert("Debe seleccionar alguna forma de pago");
+                return false;
+            }
+            
+             $("input[name=pago]").each(function (index){
+                if($(this).is(":checked")){
+                    orden.pago = $(this).val();
+                    $('.breadcrumb>li:nth-child(2)').css("color","grey");
+                    $('.breadcrumb>li:nth-child(3)').css("color","black");
+                    $('#checkout').load('./components/breadcrumbs/confirmar.php',function(){
+                        $('#direccion').text(orden.direccion);
+                        $('#envio').text(orden.envio);
+                        $('#pago').text(orden.pago);
+                    });
+                    return false;
+                }
+    
+             })
+             
+             
+    
+             console.log(orden);
+            
+        })
+        //endregion
+        $('body').on('click','#modificar',function(){
+            cargarDireccionesUsuario();
+        })
+        //#region modificar
+
         //#endregion
 
 
@@ -104,7 +179,9 @@ function cargarDireccionesUsuario() {
         url: './php/script/usuario/obtenerDirecciones.php',
         success: function(data) {
             console.log(data);
-            $('#checkout').load('./components/breadcrumbs/direccion.php');
+            $('#checkout').load('./components/breadcrumbs/direccion.php',function(){
+                $('.form-check>label:nth-child(1)>input').prop("checked",true);
+            });
         }
     })
 }

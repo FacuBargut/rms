@@ -31,5 +31,5 @@
         </div>
     </div>
     <button class="btn btn-danger" type="submit" id="saveAdress">Guardar</button>
-    <button class="btn btn-light" id="cancel">Cancelar</button>
+    <button class="btn btn-light" id="toDireccion">Cancelar</button>
 </form>
