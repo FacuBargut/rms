@@ -98,7 +98,7 @@ class usuario {
                  VALUES('$direccion','$numero','$departamento','$localidad','$codigoPostal','$provincia',$idUsuario)";
 
         if($query = $conn->query($stmt)){
-            return "Direccion ccargada con exito";
+            return "Direccion cargada con exito";
         }else{
             return "Error al registrar: ".$stmt;
         }

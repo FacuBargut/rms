@@ -76,8 +76,25 @@ body {
     color: black;
 }
 
+#checkout > h4 {
+    color: black
+}
 
+#checkout >div>div> h6 {
+    color: black
+}
 
+#checkout>div.resumen{
+    display: grid;
+    grid-template: repeat(3,1fr)/1fr;
+}
+
+#checkout>div.resumen>div:nth-child(1),
+#checkout>div.resumen>div:nth-child(2),
+#checkout>div.resumen>div:nth-child(3){
+    display: grid;
+    grid-template:  1fr/ repeat(2, 1fr);
+}
 
 
 
