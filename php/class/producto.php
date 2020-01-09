@@ -97,13 +97,14 @@ class producto {
         include "../conexion.php";
 
         date_default_timezone_set('America/Argentina/Buenos_Aires');
-        $fechaPedido = date('d-m-Y');
+        
+        $fechaPedido = date('d-m-Y H:i:s');
 
-        $fechaEntrega = date("d/m/Y", strtotime($fechaPedido."+ 10 days"));
+        $fechaEntrega = date("d-m-Y", strtotime($fechaPedido."+ 10 days"));
         $totalPedido = 0;
 
         //Registro pedido
-        $query = "INSERT INTO Pedidos (fechaPedido,totalPedido,fechaEntrega,idUsuario) VALUES (STR_TO_DATE('$fechaPedido','%d-%m-%Y %h,%i,%s'),$totalPedido,'$fechaEntrega', $userID)";
+        $query = "INSERT INTO Pedidos (fechaPedido,totalPedido,fechaEntrega,idUsuario) VALUES (now(),$totalPedido,STR_TO_DATE('$fechaEntrega','%d-%m-%Y %h,%i,%s'), $userID)";
 
         $result = $conn->query($query);
         
@@ -133,21 +134,27 @@ class producto {
     public static function registerPurchaseDetail($products, $idPedido){
         include "../conexion.php";
 
+   
 
         for($i=0;$i<count($products); $i++){
 
             $idInstrumento = $products[$i]['id'];
-            $result = $conn->query("INSERT INTO DetallePedidos (idPedido, idInstrumento) VALUES ('$idPedido','$idInstrumento')");
+            
+
+            $result = $conn->query("INSERT INTO DetallePedidos (id_pedido, id_instrumento) VALUES ('$idPedido','$idInstrumento')");
 
             if(!$result){
                 // echo "Hay problemas al registrar el detalle de producto. Elimine el pedido: ".$idPedido." para que no haya inconsistencia de datos";
-                echo "INSERT INTO DetallePedidos (idPedido, idInstrumento) VALUES ('$idPedido','$idInstrumento')";
+                echo "INSERT INTO DetallePedidos (id_pedido, id_instrumento) VALUES ('$idPedido','$idInstrumento')";
                 exit;
             }
         
         }
 
-        echo "Detalles del pedido cargados correctamente";
+        echo "Compra registrada";
+        
+
+        
 
     }
 

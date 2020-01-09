@@ -49,6 +49,7 @@ body {
 
 .wrapp-revision > .revision-body{
     height: 400px;
+    overflow: auto;
 }
 
 .wrapper-details-item > h1:nth-child(1){

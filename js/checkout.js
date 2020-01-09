@@ -130,8 +130,18 @@ $(document).ready(function() {
         $('body').on('click','#modificar',function(){
             cargarDireccionesUsuario();
         })
-        //#region modificar
-
+        //#region finalizar y comprar
+        $('body').on('click','#finalizarCompra',function(){
+            $.ajax({
+                type: 'POST',
+                url: './php/script/producto/realizarCompra.php',
+                success: function(data){
+                    if(data.trim() === "Compra registrada"){
+                        window.location.href = "./compra";
+                    } 
+                }
+            })
+        })
         //#endregion
 
 
