@@ -29,6 +29,26 @@ $(document).ready(function() {
               data: {contraseñaActual, contraseñaNueva, contraseñaConfirmada},
               success: function(data){
                   console.log(data)
+                  switch (data){
+                      case "Todos los campos deben estar completos":
+                            Swal.fire({
+                                icon: 'error',
+                                title: data,
+                                text: 'Por favor, completelos a todos'
+                            }).then((result) => {
+                                if (result.value) {
+                                     
+                                }
+                            })
+                          break;
+                      case "La contraseña ingresada es erronea":
+                          break;
+                      case "Error confirmacion de contraseña":
+                          break;
+                      case "Contraseña cambiada con exito":
+                          break;
+                      
+                  }
               }
           })
       })

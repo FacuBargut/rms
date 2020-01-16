@@ -1,4 +1,7 @@
 <?php
+
+    include "../../class/usuario.php";
+
     session_start();
 
     $contraseñaActualIngresada = $_POST['contraseñaActual'];
@@ -15,7 +18,7 @@
 
     //Comparo contraseña actual ingresada con la contraseña actual de logueo
     if(trim($contraseñaActualIngresada != trim($contraseñaActualIngresada))){
-        echo "La contraseña ingresada erronea";
+        echo "La contraseña ingresada es erronea";
         exit;
     }
 
@@ -25,5 +28,10 @@
         exit;
     }
 
+    $idUsuario = $_SESSION['usuario']->id;
+
+    $user = usuario::changePassword($contraseñaNueva,$idUsuario);
+
+    echo $user;
     
 ?>

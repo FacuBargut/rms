@@ -114,4 +114,14 @@ class usuario {
         }
         return $array_direcciones; 
     }
+
+    public static function changePassword($newPassword, $idUsuario){
+        include "../conexion.php";
+        if($stmt = $conn->query("UPDATE Usuarios SET password = '$newPassword' WHERE id = $idUsuario")){
+            return "Contraseña cambiada con exito";
+        }else{
+            return "UPDATE Usuario SET password = '$newPassword' WHERE id = $idUsuario";
+        }
+        
+    }
 }
