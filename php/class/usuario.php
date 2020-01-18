@@ -43,6 +43,11 @@ class usuario {
         return $this->id;
     }
 
+    // public function getTelephone(){
+    //     return $this->telephone;
+    // }
+
+
 
 
 
@@ -83,6 +88,18 @@ class usuario {
 
     }
 
+    public static function modifyUser($id,$name,$surname,$mail,$telephone){
+        include "../conexion.php";
+        if($stmt = $conn->query("UPDATE Usuarios SET nombre = '$name', apellido = '$surname', email = '$mail', telefono = '$telephone' WHERE id = $id")){
+            return "Usuario modificado correctamente";
+            
+        }else{
+            return "UPDATE Usuarios SET nombre = '$name', apellido = '$surname', email = '$mail', telefono = '$telephone' WHERE id = $id";
+            
+        }
+
+    }
+
 
     public static function saveAddress($address,$idUsuario){
         include "../conexion.php";  
@@ -118,7 +135,8 @@ class usuario {
     public static function changePassword($newPassword, $idUsuario){
         include "../conexion.php";
         if($stmt = $conn->query("UPDATE Usuarios SET password = '$newPassword' WHERE id = $idUsuario")){
-            return "Contraseña cambiada con exito";
+            
+            return $newPassword;
         }else{
             return "UPDATE Usuario SET password = '$newPassword' WHERE id = $idUsuario";
         }

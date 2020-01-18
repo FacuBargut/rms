@@ -43,10 +43,24 @@ $(document).ready(function(){
                 console.log(data);
                 switch(data.trim()){
                     case "Usuario no encontrado":
-                        alert("Usuario no existe");
-                        $('#LoginEmail').val('');
-                        $('#LoginPassword').val('');
-                        $('#LoginEmail').focus();
+
+                        setTimeout(function(){
+                            $('.swal2-confirm').focus();
+                          }, 300);
+                        
+                        Swal.fire({
+                            icon: 'error',
+                            title: "Usuario no existe"
+                            // text: 'Usuario no existe'
+                        }).then((result) => {
+                            if (result.value) {
+                                 $('#LoginEmail').val('');
+                                $('#LoginPassword').val('');
+                                setTimeout(function(){
+                                    $('#LoginEmail').focus();
+                                  }, 300);
+                            }
+                        })
                         break;
                     case "Sesión iniciada":
                         location.reload();

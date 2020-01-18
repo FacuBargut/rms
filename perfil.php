@@ -48,7 +48,8 @@
                   </div>
                   <div class="form-group">
                     <label>Numero de telefono</label>
-                    <input type="text" class="form-control" id="registerCodArea" aria-describedby="Codigo de area" value="<?php echo $_SESSION['usuario']->telephone;?>">
+                    <input type="text" class="form-control" id="modifyCodArea" aria-describedby="Codigo de area" value="<?php echo substr($_SESSION['usuario']->telephone,0,4);?>" placeholder="Cód. Área">
+                    <input type="text" class="form-control" id="modifyTelephoneNumber" aria-describedby="Numero de telefono" value="<?php echo "15".substr($_SESSION['usuario']->telephone,-7);?>" placeholder="Número de telefono">
                   </div>
   
                   <button class="btn btn-success" id="saveModifyUser" type="submit">Guardar</button>

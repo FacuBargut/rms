@@ -15,9 +15,10 @@
         exit;
     }
 
+    
 
     //Comparo contraseña actual ingresada con la contraseña actual de logueo
-    if(trim($contraseñaActualIngresada != trim($contraseñaActualIngresada))){
+    if(trim($contraseñaActualIngresada != trim($contraseñaActual))){
         echo "La contraseña ingresada es erronea";
         exit;
     }
@@ -30,8 +31,11 @@
 
     $idUsuario = $_SESSION['usuario']->id;
 
-    $user = usuario::changePassword($contraseñaNueva,$idUsuario);
+    $nPassword = usuario::changePassword($contraseñaNueva,$idUsuario);
 
-    echo $user;
+    $_SESSION['usuario']->password = $nPassword;
+
+
+    echo "Contraseña cambiada con exito";
     
 ?>
