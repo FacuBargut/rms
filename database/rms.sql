@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-01-2020 a las 12:58:04
+-- Tiempo de generación: 22-01-2020 a las 22:14:53
 -- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.3.11
+-- Versión de PHP: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,31 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `rms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Categorias`
+--
+
+CREATE TABLE `Categorias` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
+  `idInstrumento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `Categorias`
+--
+
+INSERT INTO `Categorias` (`id`, `descripcion`, `idInstrumento`) VALUES
+(1, 'Acustico', 1),
+(2, 'Electroacustico', 1),
+(3, 'Electrico', 1),
+(4, 'Acustico', 2),
+(5, 'Acustico', 3),
+(6, 'Electrico', 2),
+(7, 'Electrico', 3);
 
 -- --------------------------------------------------------
 
@@ -218,11 +243,7 @@ CREATE TABLE `TipoInstrumentos` (
 INSERT INTO `TipoInstrumentos` (`id`, `descripcion`) VALUES
 (1, 'Guitarra'),
 (2, 'Bajo'),
-(3, 'Bateria'),
-(4, 'Microfono'),
-(5, 'Amplificador'),
-(6, 'Pedalera'),
-(7, 'Piano');
+(3, 'Bateria');
 
 -- --------------------------------------------------------
 
@@ -253,10 +274,18 @@ INSERT INTO `Usuarios` (`id`, `nombre`, `apellido`, `email`, `password`, `activo
 --
 
 --
+-- Indices de la tabla `Categorias`
+--
+ALTER TABLE `Categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `Instrumentos`
 --
 ALTER TABLE `Instrumentos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `Instrumentos_ibfk_1` (`id-instrumento`),
+  ADD KEY `Instrumentos_ibfk_2` (`id-marca`);
 
 --
 -- Indices de la tabla `Marcas`
@@ -291,6 +320,12 @@ ALTER TABLE `Usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `Categorias`
+--
+ALTER TABLE `Categorias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `Instrumentos`
@@ -338,12 +373,6 @@ ALTER TABLE `Usuarios`
 ALTER TABLE `Instrumentos`
   ADD CONSTRAINT `Instrumentos_ibfk_1` FOREIGN KEY (`id-instrumento`) REFERENCES `TipoInstrumentos` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `Instrumentos_ibfk_2` FOREIGN KEY (`id-marca`) REFERENCES `Marcas` (`id`);
-
---
--- Filtros para la tabla `Provincias`
---
-ALTER TABLE `Provincias`
-  ADD CONSTRAINT `Provincias_ibfk_1` FOREIGN KEY (`id`) REFERENCES `Ciudades` (`id_provincia`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
