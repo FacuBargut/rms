@@ -77,9 +77,6 @@
       <?php 
 
       $productos = producto::getProducts();
-
-      
-
       for($i=0;$i<count($productos);$i++){
         // echo $productos[$i];
       ?>

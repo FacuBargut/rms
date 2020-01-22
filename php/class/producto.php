@@ -158,4 +158,35 @@ class producto {
 
     }
 
+
+    public static function getTypeInstrument(){
+        include "php/script/conexion.php";
+        $array_typeInstruments = array();
+        if($result = $conn->query("SELECT * FROM TipoInstrumentos")){
+            while($row = $result->fetch_object()){
+                
+                    array_push($array_typeInstruments,$row);
+                
+            }
+            return $array_typeInstruments;
+        }else{
+            echo "Problemas al momento de devolver los tipos de instrumentos";
+            exit;
+        }
+    }
+
+    public static function getCategoryInstrument($idInstrument){
+        include "php/script/conexion.php";
+        $array_category = array();
+        if($result = $conn->query("SELECT * FROM Categorias WHERE idInstrumento = $idInstrument")){
+            while($row = $result->fetch_object()){
+                    array_push($array_category,$row);
+            }
+            return $array_category;
+        }else{
+            echo "Problemas al momento de devolver las categorias";
+            
+        }
+    }
+
 }
