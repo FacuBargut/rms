@@ -8,7 +8,7 @@ body {
 .wrapper {
     position: relative;
     display: grid;
-    grid-template: 200px 400px 1fr 300px / 1fr;
+    grid-template: 200px 1fr 300px / 1fr;
     grid-template-areas: "header"
                          "main"
                          "footer";
@@ -23,7 +23,7 @@ body {
 }
 
 
-.main{
+section.main{
     grid-area: main;
     display: grid;
     grid-template: 1fr / 30% 70% ;
@@ -36,6 +36,29 @@ body {
     color: white;
     text-align: center;
     padding: 10px;
+}
+
+/* Estilos para el bloque de los productos que se muestran */
+.main > div.productos{
+    display: grid;
+    grid-template-rows: 30px 1fr;
+}
+
+
+
+.main > div.productos > div.productos{
+    display: grid;
+    grid-template: 1fr / repeat(4,1fr);
+}
+
+.main > div.productos > div.productos > div.card{
+    border: none;
+}
+
+.main > div.productos > div.productos > h1{
+    grid-column: 1/5;
+    text-align: center;
+    font-size: 18px;
 }
 
 

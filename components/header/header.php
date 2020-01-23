@@ -93,7 +93,7 @@
                 $category = producto::getCategoryInstrument($instruments[$i]->id);
                 for ($j=0; $j < count($category); $j++){
                 ?>
-                  <a class="dropdown-item" href="listado?i=<?php echo $instruments[$i]->descripcion;?>&t=<?php echo $category[$j]->descripcion;?>"><?php echo $category[$j]->descripcion; ?></a>
+                  <a class="dropdown-item" href="listado?i=<?php echo $instruments[$i]->id;?>&c=<?php echo $category[$j]->id;?>"><?php echo $category[$j]->descripcion; ?></a>
                 <?php
                 }
               ?>
@@ -103,31 +103,6 @@
               
             }
             ?>
-
-
-<!--   
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Bajos
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="listado?t=bass&c=electric">Electricos</a>
-                <a class="dropdown-item" href="listado?bass&c=acoustic">Acusticos</a>
-              </div>
-            </li>
-  
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Baterías
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="listado?t=drum&c=acoustic">Acusticas</a>
-                <a class="dropdown-item" href="listado?t=drum&c=electric">Electricas</a>
-                <a class="dropdown-item" href="listado?t=drum&c=plat">Platillos</a>
-                <a class="dropdown-item" href="listado?t=drum&c=red">Redoblantes</a>
-                <a class="dropdown-item" href="listado?t=drum&c=perc">Percusion</a>
-              </div>
-            </li> -->
           </ul>
         </div>
       </nav>

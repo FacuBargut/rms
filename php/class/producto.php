@@ -10,17 +10,6 @@ class producto {
     public $idBrand;
     public $idInstrument;
 
-    //Aun no se si implementarlo
-    // function __construct( $name, $surname, $email, $password, $active, $admin, $telephone) {
-    //     $this->name = $name;
-    //     $this->surname = $surname;
-    //     $this->email = $email;
-    //     $this->password = $password;
-    //     $this->active = $active;
-    //     $this->admin = $admin;
-    //     $this->telephone = $telephone;
-    // }
-
     public function getName(){
         return $this->name;
     }
@@ -189,4 +178,34 @@ class producto {
         }
     }
 
+    public static function getInstrumentCategoryAvailable($idInstrument, $idCategory){
+        include "php/script/conexion.php";
+        $array_instruments = array();
+        if($result = $conn->query("SELECT * FROM Instrumentos WHERE idTipoInstrumento = $idInstrument AND IdCategoria = $idCategory")){
+            while($row = $result->fetch_object()){
+                    array_push($array_instruments,$row);
+            }
+            return $array_instruments;
+        }else{
+            echo "Problemas al momento de devolver los instrumentos";
+            
+        }
+    }
+
+    public static function getBrandsByIdBrands($idBrand){
+        include "php/script/conexion.php";
+        print_r ($idBrand);
+        // $array_brands = array();
+        // if($result = $conn->query("SELECT * FROM Marcas WHERE idTipoInstrumento = $idInstrument AND IdCategoria = $idCategory")){
+        //     while($row = $result->fetch_object()){
+        //             array_push($array_instruments,$row);
+        //     }
+        //     return $array_instruments;
+        // }else{
+        //     echo "Problemas al momento de devolver los instrumentos";
+            
+        // }
+    }
+    
+    
 }

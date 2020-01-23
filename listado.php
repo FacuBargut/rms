@@ -1,4 +1,4 @@
-<?php>
+<?php
         include "php/class/usuario.php";
         include "php/class/producto.php";
         session_start();
@@ -30,7 +30,22 @@
 
 <body>
 
-<!-- header -->
+    <!-- Recibo variables de url -->
+    <?php
+        $idInstrumento = $_GET['i'];
+        $idCategoria = $_GET['c'];
+
+        $productos = producto::getInstrumentCategoryAvailable($idInstrumento, $idCategoria);
+        $IdMarcas = array();
+        // var_dump($productos);
+        for ($i = 0; $i < count($productos); $i++){
+            array_push($IdMarcas,$productos[$i]->idMarca);
+            // echo $productos[$i]->idMarca;
+        }
+        
+        $marcas = producto::getBrandsByIdBrands($IdMarcas);
+        
+    ?>
 
     <div class="wrapper">
 
@@ -60,7 +75,35 @@
                     </div>
                     
               </div>
-              <div class="productos"></div>
+              <div class="productos">
+                    <div class="opc-ordenamiento">
+
+                    </div>
+                    <div class="productos">
+                    <?php
+                    if(count($productos) === 0){ ?>
+                        <h1>No se han cargado productos</h1>
+                    <?php
+                    }else{
+
+                    
+                    for ($i=0; $i < count($productos); $i++){
+                    ?>
+                    <div class="card">
+                        <img src="<?php echo $productos[$i]->imagen; ?>" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php  echo $productos[$i]->nombre; ?></h5>
+                            <p>$ <?php echo $productos[$i]->precio; ?></p>
+                            <a href="producto-detalle?intrument=<?php echo $productos[$i]->id;?>" class="btn btn-primary btn-block">Ver más</a>
+                        </div>
+                    </div>
+                    <?php
+                        }
+                    }
+                    ?>
+                        
+                    </div>
+              </div>
               
         </section>
 
