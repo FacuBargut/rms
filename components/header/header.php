@@ -79,24 +79,40 @@
         
         <div class="subnavbar-bottom collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
+            <?php
+            $instruments = producto::getTypeInstrument();
+            for ($i=0; $i < count($instruments); $i++){
+              
+            ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Guitarras
+                <?php echo $instruments[$i]->descripcion; ?>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="listado.php">Clásicas</a>
-                <a class="dropdown-item" href="listado.php">Electroacusticas</a>
-                <a class="dropdown-item" href="listado.php">Electricas</a>
+              <?php
+                $category = producto::getCategoryInstrument($instruments[$i]->id);
+                for ($j=0; $j < count($category); $j++){
+                ?>
+                  <a class="dropdown-item" href="listado?i=<?php echo $instruments[$i]->descripcion;?>&t=<?php echo $category[$j]->descripcion;?>"><?php echo $category[$j]->descripcion; ?></a>
+                <?php
+                }
+              ?>
               </div>
             </li>
-  
+            <?php
+              
+            }
+            ?>
+
+
+<!--   
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Bajos
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="listado.php">Electricos</a>
-                <a class="dropdown-item" href="listado.php">Acusticos</a>
+                <a class="dropdown-item" href="listado?t=bass&c=electric">Electricos</a>
+                <a class="dropdown-item" href="listado?bass&c=acoustic">Acusticos</a>
               </div>
             </li>
   
@@ -105,13 +121,13 @@
                 Baterías
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="listado.php">Acusticas</a>
-                <a class="dropdown-item" href="listado.php">Electricas</a>
-                <a class="dropdown-item" href="listado.php">Platillos</a>
-                <a class="dropdown-item" href="listado.php">Redoblantes</a>
-                <a class="dropdown-item" href="listado.php">Percusion</a>
+                <a class="dropdown-item" href="listado?t=drum&c=acoustic">Acusticas</a>
+                <a class="dropdown-item" href="listado?t=drum&c=electric">Electricas</a>
+                <a class="dropdown-item" href="listado?t=drum&c=plat">Platillos</a>
+                <a class="dropdown-item" href="listado?t=drum&c=red">Redoblantes</a>
+                <a class="dropdown-item" href="listado?t=drum&c=perc">Percusion</a>
               </div>
-            </li>
+            </li> -->
           </ul>
         </div>
       </nav>

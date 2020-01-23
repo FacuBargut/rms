@@ -21,28 +21,26 @@ body {
     grid-template-areas: "header-top"
                         "header-bottom";
 }
-/* Carrousel styles */
-.carousel{
-    grid-area: slider;
-}
-
-.carousel > .carousel-inner > .carousel-item > img{
-    /* height: auto; */
-    width:640px;
-    height:360px;
-}
 
 
 .main{
     grid-area: main;
     display: grid;
-    grid-template: 4% 1fr / repeat(3, 1fr) ;
+    grid-template: 1fr / 30% 70% ;
 
 }
 
-.main > .offerTittle{
-    grid-column: 1/4;
+/* Estilos para el sidebar */
+.main > div.sidebar > div > div.title{
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 10px;
 }
+
+
+
+
 
 
 .footer{

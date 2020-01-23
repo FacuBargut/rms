@@ -1,5 +1,6 @@
 <?php
     include "php/class/usuario.php";
+    include "php/class/producto.php";
     session_start();
 ?>
 <!DOCTYPE html>
