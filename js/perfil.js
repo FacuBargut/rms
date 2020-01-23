@@ -164,8 +164,15 @@ $(document).ready(function() {
                                 showConfirmButton: false,
                                 timer: 1500
                             })
+                            setTimeout(function(){
+                                location.reload();
+                              }, 1500);
                             
+
                         break;
+
+                        
+
                     }
                     
                 }
@@ -177,16 +184,6 @@ $(document).ready(function() {
             setTimeout(function(){
                 $('.swal2-confirm').focus();
               }, 300);
-
-
-            // let errores = ""
-
-            // errors.forEach(element => {
-            //      errores = errores+ "<p>"+element+"</p>";
-            //      console.log(element);
-            //  });
-            // var errores = str.replace(",","<br>");
-            // console.log("errores:", errores);
             
             Swal.fire({
                 icon: 'error',
@@ -203,15 +200,6 @@ $(document).ready(function() {
             })
             
 
-            // $('.errors>.errors-body>li').css("display","none");
-
-            // console.log("Mostrando errores: ");
-            // errors.forEach(element => {
-            //     $('.errors>.errors-body').append("<li>" + element + "</li>")
-            //     $('.errors').css("display", "block");
-            //     console.log(element);
-            // });
-            // errors.length = 0;
 
         }
 
