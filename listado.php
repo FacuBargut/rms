@@ -44,6 +44,8 @@
         }
         
         $marcas = producto::getBrandsByIdBrands($IdMarcas);
+
+        print_r ($marcas);
         
     ?>
 
@@ -55,22 +57,34 @@
 
         <section class="main container my-3">
               <div class="sidebar">
-                    <div class="sidebarIntruments">
+                    <!-- <div class="sidebarIntruments">
                         <div class="title">Instrumentos</div>
                         <div class="body">
-                            <ul></ul>
+                            <ul>
+
+                            </ul>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="sidebarMarcas">
                         <div class="title">Marcas</div>
                         <div class="body">
-                            <ul></ul>
+                            <ul>
+                                <?php 
+                                    for ( $i = 0; $i < count($marcas); $i ++){ ?>
+                                        <li><p data-id = "<?php echo $marcas[$i]->IdMarca; ?>"><?php echo $marcas[$i]->NombreMarca?></p><span>(<?php echo $marcas[$i]->Cantidad;?>)</span></li>
+                                        <?php
+                                    }
+                                ?>
+                            </ul>
                         </div>
                     </div>
                     <div class="sidebarPrice">
                         <div class="title">Rango de Precio</div>
                         <div class="body">
-                            <input type="number" value="Min."> - <input type="number" value="Máx."><button class="btn btn-light">Consultar</button>
+                            <div class="inputs">
+                                <input type="number" value="0"> - <input type="number" value="999999">
+                            </div>
+                            <button class="btn btn-light" id="consultPrice">Consultar</button>
                         </div>
                     </div>
                     

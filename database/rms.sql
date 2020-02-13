@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-01-2020 a las 22:14:53
+-- Tiempo de generación: 13-02-2020 a las 02:32:02
 -- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.3.10
+-- Versión de PHP: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -118,18 +118,19 @@ CREATE TABLE `Instrumentos` (
   `precio` decimal(10,2) NOT NULL,
   `imagen` varchar(100) NOT NULL,
   `stock` int(11) NOT NULL,
-  `id-marca` int(11) NOT NULL,
-  `id-instrumento` int(11) NOT NULL
+  `idMarca` int(11) NOT NULL,
+  `idTipoInstrumento` int(11) NOT NULL,
+  `idCategoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `Instrumentos`
 --
 
-INSERT INTO `Instrumentos` (`id`, `nombre`, `descripcion`, `precio`, `imagen`, `stock`, `id-marca`, `id-instrumento`) VALUES
-(1, 'IBANEZ GRG150', 'Guitarra Electrica Ser.Grg 24 Trs. Blanca', '20300.96', 'img/productos/guitarras/ibanes.jpg', 100, 3, 1),
-(2, 'Guitarra Gibson Les Paul Standard T 2017', 'Guitarra con cuerpo de caoba, tapa de arce AAA, mástil de caoba cónico delgado, diapason depalisandro y radio compuesto', '3001233.50', 'img/productos/guitarras/gibson.jpg', 500, 1, 1),
-(3, 'Guitarra Electrica Fender Stratocaster', 'Guitarra Fender Classic Player 50 Stratocaster maple fingerboard de la serie Classic Player, con 2 tonos de color y cuerpo aliso y con mastil de Arce', '600.00', 'img/productos/guitarras/fender.jpg', 600, 2, 1);
+INSERT INTO `Instrumentos` (`id`, `nombre`, `descripcion`, `precio`, `imagen`, `stock`, `idMarca`, `idTipoInstrumento`, `idCategoria`) VALUES
+(1, 'IBANEZ GRG150', 'Guitarra Electrica Ser.Grg 24 Trs. Blanca', '20300.96', 'img/productos/guitarras/ibanes.jpg', 100, 3, 1, 3),
+(2, 'Guitarra Gibson Les Paul Standard T 2017', 'Guitarra con cuerpo de caoba, tapa de arce AAA, mástil de caoba cónico delgado, diapason depalisandro y radio compuesto', '3001233.50', 'img/productos/guitarras/gibson.jpg', 500, 1, 1, 3),
+(3, 'Guitarra Electrica Fender Stratocaster', 'Guitarra Fender Classic Player 50 Stratocaster maple fingerboard de la serie Classic Player, con 2 tonos de color y cuerpo aliso y con mastil de Arce', '600.00', 'img/productos/guitarras/fender.jpg', 600, 2, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -284,8 +285,8 @@ ALTER TABLE `Categorias`
 --
 ALTER TABLE `Instrumentos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `Instrumentos_ibfk_1` (`id-instrumento`),
-  ADD KEY `Instrumentos_ibfk_2` (`id-marca`);
+  ADD KEY `Instrumentos_ibfk_1` (`idTipoInstrumento`),
+  ADD KEY `Instrumentos_ibfk_2` (`idMarca`);
 
 --
 -- Indices de la tabla `Marcas`
@@ -371,8 +372,8 @@ ALTER TABLE `Usuarios`
 -- Filtros para la tabla `Instrumentos`
 --
 ALTER TABLE `Instrumentos`
-  ADD CONSTRAINT `Instrumentos_ibfk_1` FOREIGN KEY (`id-instrumento`) REFERENCES `TipoInstrumentos` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Instrumentos_ibfk_2` FOREIGN KEY (`id-marca`) REFERENCES `Marcas` (`id`);
+  ADD CONSTRAINT `Instrumentos_ibfk_1` FOREIGN KEY (`idTipoInstrumento`) REFERENCES `TipoInstrumentos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Instrumentos_ibfk_2` FOREIGN KEY (`idMarca`) REFERENCES `Marcas` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

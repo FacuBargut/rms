@@ -38,6 +38,38 @@ section.main{
     padding: 10px;
 }
 
+.main > div.sidebar > div > div.body > ul{
+    padding: 0;
+    
+}
+
+.main > div.sidebar > div > div.body > ul > li{
+    text-align: center;
+    list-style: none;
+    cursor: pointer;
+}
+
+.main > div.sidebar > div > div.body > ul > li > p{
+    display: inline-block;
+}
+
+.main > div.sidebar > div > div.body > ul > li:hover{
+    color: #e67a7a;;
+}
+
+
+.main > div.sidebar > div.sidebarPrice > div.body {
+    display: grid;
+    grid-template: repeat(2, 1fr) / 1fr;
+}
+
+.main > div.sidebar > div.sidebarPrice > div.body > div.inputs > input {
+    width: 47%;
+    text-align: center;
+}
+
+
+
 /* Estilos para el bloque de los productos que se muestran */
 .main > div.productos{
     display: grid;
@@ -53,6 +85,10 @@ section.main{
 
 .main > div.productos > div.productos > div.card{
     border: none;
+}
+
+.main > div.productos > div.productos > div.card > img{
+    width: 100%;
 }
 
 .main > div.productos > div.productos > h1{

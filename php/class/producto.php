@@ -192,20 +192,50 @@ class producto {
         }
     }
 
-    public static function getBrandsByIdBrands($idBrand){
+    public static function getBrandsByIdBrands($idsBrand){
         include "php/script/conexion.php";
-        print_r ($idBrand);
-        // $array_brands = array();
-        // if($result = $conn->query("SELECT * FROM Marcas WHERE idTipoInstrumento = $idInstrument AND IdCategoria = $idCategory")){
-        //     while($row = $result->fetch_object()){
-        //             array_push($array_instruments,$row);
-        //     }
-        //     return $array_instruments;
-        // }else{
-        //     echo "Problemas al momento de devolver los instrumentos";
-            
-        // }
+        $array_brands = array(); 
+        for ($i = 0; $i < count($idsBrand); $i++){
+            $idBrand = $idsBrand[$i];
+            if($result = $conn->query("SELECT i.idMarca AS 'IdMarca', m.descripcion AS 'NombreMarca', COUNT(*) AS 'Cantidad' FROM Marcas m INNER JOIN Instrumentos i ON m.id = i.idMarca WHERE i.idMarca = $idBrand")){
+                while($row = $result->fetch_object()){
+                        array_push($array_brands,$row);
+                }
+            }else{
+                echo "Problemas al momento de devolver los instrumentos";
+            }
+        }
+        return $array_brands;
     }
     
+
+    public static function getProductosByMinMaxPrice($minPrice,$maxPrice){
+        include "../conexion.php";
+        $array_products = array(); 
+        
+            if($result = $conn->query("SELECT * FROM Instrumentos WHERE precio BETWEEN $minPrice AND $maxPrice")){
+                while($row = $result->fetch_object()){
+                        array_push($array_products,$row);
+                }
+            }else{
+                echo "Problemas al momento de devolver los instrumentos";
+            }
+        
+        return $array_products;
+    }
+    
+    public static function getProductsByBrand($idBrand){
+        include "../conexion.php";
+        $array_products = array(); 
+            if($result = $conn->query("SELECT * FROM Instrumentos WHERE idMarca = $idBrand")){
+                while($row = $result->fetch_object()){
+                        array_push($array_products,$row);
+                }
+            }else{
+                echo "Problemas al momento de devolver los instrumentos";
+            }
+        
+        return $array_products;
+    }
     
 }
