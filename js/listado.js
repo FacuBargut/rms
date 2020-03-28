@@ -40,7 +40,7 @@ $(document).ready(function() {
             url: './php/script/producto/ObtenerInstrumentosPorMarca.php',
             data: {marca},
             success: function(data){
-                var instrumentos = JSON.parse(data);
+                 var instrumentos = JSON.parse(data);
                 console.log(instrumentos);
                 $('.productos>.productos').html('');
                 for (let i = 0; i < instrumentos.length ; i ++){
