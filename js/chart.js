@@ -1,4 +1,10 @@
 $(document).ready(function() {
+
+    
+
+
+
+
     console.log("Script cargado correctamente");
 
     //#region Click button borrar carrito
@@ -52,6 +58,8 @@ $(document).ready(function() {
     //#region Eliminar producto del carro de compras
     $('.deleteProductChart').click(function(){
         var idProduct = $(this).data("id");
+        var _this = $(this).parent().parent();
+        var precioProd = $(this).parent().parent().find('td:eq(4)>p');
         
         $.ajax({
             type: 'POST',
@@ -59,12 +67,45 @@ $(document).ready(function() {
             data: {idProduct},
             success: function(data){
                 console.log(data);
+                _this.fadeOut(300, function(){
+                    let total = $('#totalChart>input').val();
+                    let nTotal = parseInt(total) - parseInt(precioProd.text());
+                    console.log("Total carrito: ", nTotal);
+                    $('#totalChart>input').val(nTotal);
+                    // console.log(total);
+                    // console.log(precioProd.text());
+                    // // console.log(total - );
+                    $(this).remove();
+                })
+                
             }
         })
-
         
         console.log(idProduct);
     })
+
+    // $('body').on('change', 'body > div.wrapper > section > table > tbody > tr > td > input[type=number]',function(){
+    //         console.log("Modificacion");
+    // })
+
+    $('.cantProduct').change(function (e) { 
+        const options2 = { style: 'currency', currency: 'USD' };
+        let cantProduct = parseInt($(this).val());
+        let priceProduct = parseFloat($(this).parent().parent().find("td:eq(2)>p").text());
+        let newSubtProduct = cantProduct * priceProduct;
+        const numberFormat = new Intl.NumberFormat('en-US', options2);
+        $(this).parent().parent().find("td:eq(4)>p").text(numberFormat.format(newSubtProduct));
+        let total = parseInt($('#totalChart>input').val());
+        
+        $('div.wrapper > section > table > tbody > tr > td:eq(4)').each(function() {
+            console.log($(this).text());
+        });
+        
+        
+        $('#totalChart>input').val(total);
+    });
+
+
     //#endregion
 
 

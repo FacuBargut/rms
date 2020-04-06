@@ -20,19 +20,19 @@
         //Validaciones del lado del servidor
         if($name === "" && $surname === "" && $mail === "" && $password === "" && $active === "" &&
            $admin === "" && $telephone === ""){
-            echo "Ningun campo puede estar vacio";
+            echo "Ningun campo puede estar vacío";
             exit;
         }else if (!filter_var($mail, FILTER_VALIDATE_EMAIL)){
-            echo "Se necesita un mail valido";
+            echo "Se necesita un mail válido";
             exit;
         }else if( $password != $passwordConfirmed ){
             echo "Las contraseñas son distintas";
             exit;
         }else if ( strlen($codArea) < 3 ){
-            echo "El codigo de area es menor a 3";
+            echo "El código de area es menor a 3";
             exit;
         }else if( strlen($telephoneNumber) != 7){
-            echo "El numero de telefono no tiene 7 digitos";
+            echo "El número de telefono no tiene 7 dígitos";
             exit;
         }
 
