@@ -13,8 +13,6 @@ $(document).ready(function() {
 
     $('button#registerUser').click(function(e) {
         e.preventDefault();
-
-
         var name = $('#registerName').val();
         var surname = $('#registerSurname').val();
         var mail = $('#registerEmail').val();
@@ -30,14 +28,15 @@ $(document).ready(function() {
             password.trim() === "" || passwordConfirmed.trim() === "" || codArea.trim() === "" ||
             telephoneNumber.trim() === "") {
             let error = "Todos los campos deben estar completos";
-            errors.push(error)
-                // console.log("Los campos deben estar completos")
+            showErrorMessage(error);
+            return 0;
         }
         if (!regex.test(mail.trim())) {
             $('#registerEmail').val('');
             $('#registerEmail').focus();
             $("#registerEmail").addClass("is-invalid");
             let error = "El mail no esta en un formato correcto"
+            showErrorMessage(error);
             errors.push(error);
         }
         if (password != passwordConfirmed) {
@@ -47,7 +46,8 @@ $(document).ready(function() {
             $("#registerPassword1").addClass("is-invalid");
             $("#registerPassword2").addClass("is-invalid");
             let error = "Las contraseñas no coinciden";
-            errors.push(error);
+            showErrorMessage(error);
+            return;
         }
         if (codArea.length < 3) {
             // console.log("");
@@ -55,7 +55,8 @@ $(document).ready(function() {
             $('#registerCodArea').focus();
             $("#registerCodArea").addClass("is-invalid");
             let error = "El codigo de area no puede tener menos de 3 digitos"
-            errors.push(error);
+            showErrorMessage(error);
+            return;
         }
         if (telephoneNumber.length != 7) {
             // console.log("El numero de telefono debe tener 7 digitos");
@@ -63,10 +64,11 @@ $(document).ready(function() {
             $("#telephoneNumber").focus();
             $("#telephoneNumber").addClass("is-invalid");
             let error = "El numero de telefono debe tener 7 digitos";
-            errors.push(error)
+            showErrorMessage(error);
+            return;
         }
 
-        if (errors.length == 0) {
+        
             var user = {
                 name: name,
                 surname: surname,
@@ -86,6 +88,31 @@ $(document).ready(function() {
                 success: function(data) {
 
                     console.log("respuesta del script: ", data);
+                    switch(data.trim()){
+                        case "Ningun campo puede estar vacío":
+                            showErrorMessage(data);
+                        break;
+
+                        case "Se necesita un mail válido":
+                            showErrorMessage(data);
+                        break;
+
+                        case "Las contraseñas son distintas":
+                            showErrorMessage(data);
+                        break;
+
+                        case "El código de area es menor a 3":
+                            showErrorMessage(data);
+                        break;
+
+                        case "El número de telefono no tiene 7 dígitos":
+                            showErrorMessage(data);
+                        break;
+                        case "Enviando mail":
+                            showSuccessMessage(data);
+                        break;
+                    
+                    }
                 }
             })
 
@@ -93,22 +120,10 @@ $(document).ready(function() {
 
 
 
-        } else {
 
-            $('.errors>.errors-body>li').css("display","none");
-
-            console.log("Mostrando errores: ");
-            errors.forEach(element => {
-                $('.errors>.errors-body').append("<li>" + element + "</li>")
-                $('.errors').css("display", "block");
-                console.log(element);
-            });
-            errors.length = 0;
-
-        }
     })
 
-
+//#region  Funciones
     //---------------------------------------------------------------------------------------------
     $("#registerName").blur(function() {
         var name = $('#registerName').val();
@@ -191,5 +206,28 @@ $('body').on('click','.errors>.errors-header>i',function(){
     $('.errors').css('display','none');
 })
 
+
+function showErrorMessage(message){
+    Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: message
+    })
+}
+
+function showSuccessMessage(message){
+    Swal.fire({
+        icon: 'success',
+        title: 'Cuenta creada con éxito',
+        text: 'Te enviamos un correo electrónico para terminar el proceso de registro :)',
+        showConfirmButton: true,
+        timer: 5000
+      }).then((result) => {
+          if(result.value) {
+              window.location.href='./';
+          }
+      })
+}
+//#endregion
 
 })

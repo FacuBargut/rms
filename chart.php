@@ -4,7 +4,7 @@
   include "php/class/producto.php";
   session_start();
 
-  print_r($_SESSION['carrito']);
+  // print_r($_SESSION['carrito']);
   
 ?>
 
@@ -37,10 +37,10 @@
         <section class="main">
 
         <?php
-
+          
           if(!isset($_SESSION['carrito'])){
           ?>
-            <h1>Carrito de compras vacio</h1>
+            <h1>Carrito de compras vacío</h1>
           <?php
           }else{
 
@@ -59,15 +59,15 @@
               <tbody>
                     <?php
                         $total = 0;
-                        for($i=0;$i<count($_SESSION['carrito']);$i++){
+                        for($i=0; $i<count($_SESSION['carrito']) ;$i++){
                             $total = $total + ($_SESSION['carrito'][$i]['cantidad']*$_SESSION['carrito'][$i]['precio']);
                     ?>
                       <tr>
                         <td><img src="<?php echo $_SESSION['carrito'][$i]['img']; ?>" alt="">
                         <td><p><?php echo $_SESSION['carrito'][$i]['nombre']; ?></p></td>
-                        <td>$ <?php echo number_format($_SESSION['carrito'][$i]['precio'],2,",","."); ?></td>
-                        <td><?php echo $_SESSION['carrito'][$i]['cantidad']; ?></td>
-                        <td>$ <?php echo number_format(($_SESSION['carrito'][$i]['cantidad']*$_SESSION['carrito'][$i]['precio']),2,",","."); ?></td>
+                        <td>$ <p ><?php echo number_format($_SESSION['carrito'][$i]['precio'],2,",","."); ?></p></td>
+                        <td> <input class="cantProduct" type="number" value="<?php echo $_SESSION['carrito'][$i]['cantidad']; ?>"> </td>
+                        <td><p><?php echo number_format(($_SESSION['carrito'][$i]['cantidad']*$_SESSION['carrito'][$i]['precio']),2,",","."); ?></p></td>
                         <td>
                         <!-- number_format($_SESSION['carrito'][$i]['total'],2,",",".") -->
                           <button data-id="<?php echo $_SESSION['carrito'][$i]['id']; ?>"
@@ -83,29 +83,35 @@
              </tbody>
         </table>
         <div class="totalChart">
-
+                    
         <!-- echo number_format($Producto->precio,2,",",".") -->
-             <h3>Total: $<input type="text" value="<?php echo number_format($total,2,",","."); ?>"></h3>
+             <h3 id="totalChart">Total: $<input type="text" value="<?php echo $total; ?>"></h3>
         </div>
-        <?php
+        <?php ?>
+
+          <div class="action-buttons">
+              <button id="deleteChart"
+                      class="btn btn-danger"
+                      <?php if(!isset($_SESSION['carrito'])){
+                        ?>disabled<?php } ?>
+                      >Vaciar carro
+              </button>
+              <button id="buyChart"
+                      class="btn btn-primary"
+                      <?php if(!isset($_SESSION['carrito'])){
+                        ?>disabled<?php } ?>
+                      >Comprar
+              </button>
+          </div>
+          <?php
           }
         ?>
-        </section>
 
-        <div class="action-buttons">
-                <button id="deleteChart"
-                        class="btn btn-danger"
-                        <?php if(!isset($_SESSION['carrito'])){
-                          ?>disabled<?php } ?>
-                        >Vaciar carro
-                </button>
-                <button id="buyChart"
-                        class="btn btn-primary"
-                        <?php if(!isset($_SESSION['carrito'])){
-                          ?>disabled<?php } ?>
-                        >Comprar
-                </button>
-        </div>
+
+        </section>
+          
+        
+
 
 
         <div class="footer">
