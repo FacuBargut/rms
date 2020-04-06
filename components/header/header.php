@@ -82,7 +82,6 @@
             <?php
             $instruments = producto::getTypeInstrument();
             for ($i=0; $i < count($instruments); $i++){
-              
             ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -151,7 +151,7 @@ class producto {
     public static function getTypeInstrument(){
         include "php/script/conexion.php";
         $array_typeInstruments = array();
-        if($result = $conn->query("SELECT * FROM TipoInstrumentos")){
+        if($result = $conn->query("SELECT * FROM tipoinstrumentos")){
             while($row = $result->fetch_object()){
                 
                     array_push($array_typeInstruments,$row);
