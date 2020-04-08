@@ -47,7 +47,22 @@ class usuario {
     //     return $this->telephone;
     // }
 
+    
 
+    public static function getUsers(){
+        
+        include "conexion.php";
+        $array_users = array();
+        if($result = $conn->query("SELECT * FROM usuarios")){
+            while($row = $result->fetch_object()){
+                array_push($array_users, $row);
+            }
+        }else{
+            echo "No hay usuarios";
+            exit;
+        }
+         return $array_users;
+    }
 
 
 

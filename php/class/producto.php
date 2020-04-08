@@ -35,7 +35,7 @@ class producto {
 
 
     public static function getProducts(){
-        include "php/script/conexion.php";
+        include "conexion.php";
         $array_instruments = array();
 
         if($result = $conn->query("SELECT * FROM Instrumentos")){
@@ -51,6 +51,50 @@ class producto {
 
         return $array_instruments;
     }
+
+    public static function getBrands(){
+        include "conexion.php";
+        $array_brands = array();
+        if($result = $conn->query("SELECT * FROM Marcas")){
+            while($row = $result->fetch_object()){
+                array_push($array_brands, $row);
+            }
+        }else{
+            echo "No hay marcas";
+            exit;
+        }
+        return $array_brands;
+    }
+
+    public static function getIntrumentTypes(){
+        include "conexion.php";
+        $array_intrumentTypes = array();
+        if($result = $conn->query("SELECT * FROM tipoinstrumentos")){
+            while($row = $result->fetch_object()){
+                array_push($array_intrumentTypes, $row);
+            }
+        }else{
+            echo "No hay tipos de intrumentos cargados";
+            exit;
+        }
+        return $array_intrumentTypes;
+    }
+
+    public static function getCategories(){
+        include "conexion.php";
+        $array_categories = array();
+        if($result = $conn->query("SELECT * FROM categorias")){
+            while($row = $result->fetch_object()){
+                array_push($array_categories, $row);
+            }
+        }else{
+            echo "No hay categorías cargadas";
+            exit;
+        }
+        return $array_categories;
+    }
+
+
 
     public static function getProductById($idProducto){
         include "php/script/conexion.php";
