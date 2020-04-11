@@ -81,7 +81,7 @@
                             <td><?php echo $productos[$i]->descripcion;?></td>
                             <td><?php echo $productos[$i]->precio;?></td>
                             <td style="width:10%;">
-                                <img style="width:100%;" src="<?php echo "../".$productos[$i]->imagen;?>" alt="">
+                                <img class="productImg" style="width:100%;" src="<?php echo "../".$productos[$i]->imagen;?>" alt="">
                                 
                             </td>
                             <td><?php echo $productos[$i]->stock;?></td>
@@ -197,36 +197,43 @@
               <label for="precio">Precio</label>
               <input type="text" class="form-control" id="productPrice">
             </div>
-            <div class="form-group">
-              <label for="exampleFormControlFile1">Example file input</label>
-              <input type="file" class="form-control-file" id="productImage">
+            <div class="row">
+                <div class="form-group col-md-4">
+                  <label for="exampleFormControlFile1">Example file input</label>
+                  <input type="file" class="form-control-file" id="productImage">
+                </div>
+                <div style="border: 1px solid grey;text-align: center;" class="form-group col-md-8">
+                      <img style="width:30%;" class="figure-img img-fluid rounded" id="img" src="" alt="">
+                </div>
             </div>
-            <div class="form-group col-md-4">
-                <label for="inputMarca">Marca</label>
-                <select id="inputMarca" class="form-control">
-                  <option selected></option>
-                  <?php for ($i=0; $i < count($marcas) ; $i++) {  ?>
-                    <option> <?php echo $marcas[$i]->descripcion; ?> </option>
-                    <?php }  ?>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputTipo">Tipo</label>
-                <select id="inputTipo" class="form-control">
-                  <option selected>Choose...</option>
-                  <?php for ($i=0; $i < count($tipoIntrumentos) ; $i++) {  ?>
-                    <option> <?php echo $tipoIntrumentos[$i]->descripcion; ?> </option>
-                    <?php }  ?>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputCategoria">Categoría</label>
-                <select id="inputCategoria" class="form-control">
-                  <option selected>Choose...</option>
-                  <?php for ($i=0; $i < count($categorias) ; $i++) {  ?>
-                    <option> <?php echo $categorias[$i]->descripcion; ?> </option>
-                    <?php }  ?>
-                </select>
+            <div class="row">
+                <div style="cursor:pointer;" class="form-group col-md-4">
+                    <label for="inputMarca">Marca</label>
+                    <select id="inputMarca" class="form-control">
+                      <option selected></option>
+                      <?php for ($i=0; $i < count($marcas) ; $i++) {  ?>
+                        <option> <?php echo $marcas[$i]->descripcion; ?> </option>
+                        <?php }  ?>
+                    </select>
+                </div>
+                <div style="cursor:pointer;" class="form-group col-md-4">
+                    <label for="inputTipo">Tipo</label>
+                    <select id="inputTipo" class="form-control">
+                      <option selected>Choose...</option>
+                      <?php for ($i=0; $i < count($tipoIntrumentos) ; $i++) {  ?>
+                        <option> <?php echo $tipoIntrumentos[$i]->descripcion; ?> </option>
+                        <?php }  ?>
+                    </select>
+                </div>
+                <div style="cursor:pointer;" class="form-group col-md-4">
+                    <label for="inputCategoria">Categoría</label>
+                    <select id="inputCategoria" class="form-control">
+                      <option selected>Choose...</option>
+                      <?php for ($i=0; $i < count($categorias) ; $i++) {  ?>
+                        <option> <?php echo $categorias[$i]->descripcion; ?> </option>
+                        <?php }  ?>
+                    </select>
+                </div>
             </div>
       </form>
       </div>

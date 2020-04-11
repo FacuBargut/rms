@@ -4,7 +4,9 @@ $(document).ready(function(){
     var globalProductName = "";
     var globalProductDescription = "";
     var globalProductPrice = "";
+    var globalProductImg = "";
     var globalProductMarca = "";
+    var globalProductStock = "";
     var globalProductTipo = "";
     var globalProductCategoria = "";
 
@@ -44,21 +46,29 @@ $('.editProduct').click(function(){
     globalProductDescription = productDescription
     let productPrice = $(this).parent().parent().children('tr > td:nth-child(3)').text();
     globalProductPrice = productPrice;
+    let productImg = $('.productImg').attr('src');
+    globalProductImg = productImg;
     let productStock = $(this).parent().parent().children('tr > td:nth-child(5)').text();
+    globalProductStock = productStock
     let productMarca = $(this).parent().parent().children('tr > td:nth-child(6)').text();
     globalProductMarca = productMarca
     let productTipo = $(this).parent().parent().children('tr > td:nth-child(7)').text();
     globalProductTipo = productTipo
     let productCategoria = $(this).parent().parent().children('tr > td:nth-child(8)').text();
     globalProductCategoria = productCategoria
+
+
+    console.log(productImg);
+
+    $("#img").attr("src", productImg);
     
     $('#productName').val(productName);
     $('#productDescription').val(productDescription);
     $('#productPrice').val(productPrice);
     
     console.log($('#inputMarca option:selected').text(productMarca));
-    console.log($('#inputTipo option:selected').text(productTipo));
-    console.log($('#inputCategoria option:selected').text(productCategoria));
+    // console.log($('#inputTipo option:selected').text(productTipo));
+    // console.log($('#inputCategoria option:selected').text(productCategoria));
 
 
 
@@ -97,9 +107,9 @@ $('.editProduct').click(function(){
            newProductPrice !== globalProductPrice 
             
             ){
-            console.log("Nombre fue modificado");
+            // console.log("Nombre fue modificado");
         }else{
-            console.log("Nombre no fue modificado");
+            // console.log("Nombre no fue modificado");
         }
 
 
