@@ -38,7 +38,7 @@ class producto {
         include "conexion.php";
         $array_instruments = array();
 
-        if($result = $conn->query("SELECT * FROM Instrumentos")){
+        if($result = $conn->query("SELECT * FROM instrumentos")){
 
             while($row = $result->fetch_object()){
                 array_push($array_instruments,$row);
@@ -55,7 +55,7 @@ class producto {
     public static function getBrands(){
         include "conexion.php";
         $array_brands = array();
-        if($result = $conn->query("SELECT * FROM Marcas")){
+        if($result = $conn->query("SELECT * FROM marcas")){
             while($row = $result->fetch_object()){
                 array_push($array_brands, $row);
             }

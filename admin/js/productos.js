@@ -39,7 +39,6 @@ $('.deleteProduct').click(function(){
 $('.editProduct').click(function(){
     console.log("Editando producto");
 
-
     let productName = $(this).parent().parent().children('tr > td:nth-child(1)').text();
     globalProductName = productName;
     let productDescription = $(this).parent().parent().children('tr > td:nth-child(2)').text();
@@ -51,74 +50,88 @@ $('.editProduct').click(function(){
     let productStock = $(this).parent().parent().children('tr > td:nth-child(5)').text();
     globalProductStock = productStock
     let productMarca = $(this).parent().parent().children('tr > td:nth-child(6)').text();
-    globalProductMarca = productMarca
+    globalProductMarca = productMarca.trim();
     let productTipo = $(this).parent().parent().children('tr > td:nth-child(7)').text();
-    globalProductTipo = productTipo
+    globalProductTipo = productTipo.trim();
     let productCategoria = $(this).parent().parent().children('tr > td:nth-child(8)').text();
-    globalProductCategoria = productCategoria
-
-
-    console.log(productImg);
+    globalProductCategoria = productCategoria.trim();
 
     $("#img").attr("src", productImg);
-    
     $('#productName').val(productName);
     $('#productDescription').val(productDescription);
     $('#productPrice').val(productPrice);
-    
-    console.log($('#inputMarca option:selected').text(productMarca));
-    // console.log($('#inputTipo option:selected').text(productTipo));
-    // console.log($('#inputCategoria option:selected').text(productCategoria));
-
-
-
-
-
-    // Swal.fire({
-    //     title: 'Esta seguro?',
-    //     text: "Este producto se eliminara permanentemente",
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#3085d6',
-    //     cancelButtonColor: '#d33',
-    //     confirmButtonText: 'Eliminar',
-    //     cancelButtonText: 'Cancelar'
-    //   }).then((result) => {
-    //     if (result.value) {
-    //       //Ejecutras AJAX
-    //       $(this).parent().parent().fadeOut();
-    //       Swal.fire(
-    //         'Eliminado con éxito.',
-    //         'El producto fue eliminado',
-    //         'success'
-    //       )
-    //     }
-    //   })
+    $('#inputMarca option:selected').text(productMarca)
+    $('#inputTipo option:selected').text(productTipo)
+    $('#inputCategoria option:selected').text(productCategoria)
 })
 
     $('body').on('click','#updateProduct',function(){
         let newProductName = $('#productName').val();
         let newProductDescription = $('#productDescription').val();
         let newProductPrice = $('#productPrice').val();
-        // let newProductName = $('#productName').val();
+        let newProductMarca = $('#inputMarca').val();
+        let newProductType = $('#inputTipo').val();
+        let newProductCategory = $('#inputCategoria').val();
 
-        if(newProductName !== globalProductName &&
-           newProductDescription  !== globalProductDescription &&
-           newProductPrice !== globalProductPrice 
+        if(newProductName !== globalProductName ||
+           newProductDescription  !== globalProductDescription ||
+           newProductPrice !== globalProductPrice ||
+           newProductMarca !== globalProductMarca ||
+           newProductType !== globalProductTipo ||
+           newProductCategory !== globalProductCategoria
             
             ){
-            // console.log("Nombre fue modificado");
+                Swal.fire({
+                            title: 'Producto modificado',
+                            text: "Desea continuar con la modificación del producto",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Modificar',
+                            cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                if (result.value) {
+                                    
+                                    $('#staticBackdrop').modal('hide')
+                                    //Ejecutar AJAX
+                                    // $(this).parent().parent().fadeOut();
+                                    // Swal.fire(
+                                    //     'Eliminado con éxito.',
+                                    //     'El producto fue eliminado',
+                                    //     'success'
+                                    // )
+                                }
+                            })
+
         }else{
-            // console.log("Nombre no fue modificado");
+            $('#staticBackdrop').modal('hide')
         }
-
-
-
-        // console.log(globalProductName);
-        // console.log(newProductName);
-
-        
     });
+
+
+    // $('body').on('change', '#file',function(){
+    //     var fd = new FormData();
+    //     var files = $('#file')[0].files[0];
+    //     fd.append('file',files);
+
+    //     $.ajax({
+    //         url: 'php/uploadImage.php',
+    //         type: 'post',
+    //         data: fd,
+    //         contentType: false,
+    //         processData: false,
+    //         success: function(response){
+    //             if(response != 0){
+    //                 $("#img").attr("src",response); 
+    //                 $(".preview img").show(); // Display image element
+    //             }else{
+    //                 alert('file not uploaded');
+    //             }
+    //         },
+    //     });
+
+    // })
 
 
 })

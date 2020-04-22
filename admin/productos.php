@@ -14,7 +14,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Clientes</title>
+  <title>Productos</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -48,7 +48,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
+          <h1 class="h3 mb-2 text-gray-800">Productos</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -200,9 +200,9 @@
             <div class="row">
                 <div class="form-group col-md-4">
                   <label for="exampleFormControlFile1">Example file input</label>
-                  <input type="file" class="form-control-file" id="productImage">
+                  <input type="file" name="file" class="form-control-file" id="file">
                 </div>
-                <div style="border: 1px solid grey;text-align: center;" class="form-group col-md-8">
+                <div id="imgContainer" style="border: 1px solid grey;text-align: center;" class="form-group col-md-8">
                       <img style="width:30%;" class="figure-img img-fluid rounded" id="img" src="" alt="">
                 </div>
             </div>
