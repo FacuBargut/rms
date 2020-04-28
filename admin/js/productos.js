@@ -10,7 +10,36 @@ $(document).ready(function(){
     var globalProductTipo = "";
     var globalProductCategoria = "";
 
+
+    var editProduct = false;
+
+
+
+
+
+
 // Funciones
+$('.addProduct').click(function(){
+    console.log("Agregar producto");
+    $('#productName').val('');
+    $('#productDescription').val('');
+    $('#productPrice').val('');
+    $('#file').val('');
+    $("#img").attr("src", '');
+    $('#inputMarca').val('');
+    $('#inputTipo').val('');
+    $('#inputCategoria').val('');
+
+
+    $('#updateProduct').css("display","none");
+    $('#addProduct').css("display","block");
+    
+})
+
+
+
+
+
 $('.deleteProduct').click(function(){
     console.log("Eliminando producto");
     Swal.fire({
@@ -63,7 +92,57 @@ $('.editProduct').click(function(){
     $('#inputMarca option:selected').text(productMarca)
     $('#inputTipo option:selected').text(productTipo)
     $('#inputCategoria option:selected').text(productCategoria)
+
+    $('#updateProduct').css("display","block");
+    $('#addProduct').css("display","none");
 })
+
+
+
+
+    $('body').on('click','#addProduct',function(){
+
+        nProduct = {
+            name: String,
+            description: String,
+            price: String,
+            img: String,
+            stock: String,
+            marca: String,
+            tipo: String,
+            category: String,
+        }
+        
+        nProduct.name = $('#productName').val();
+        nProduct.description = $('#productDescription').val();
+        nProduct.price = $('#productPrice').val();
+        // nProduct.img = $('.productImg').attr('src');
+        nProduct.stock = $('#inputStock').val();
+        nProduct.marca = $('#inputMarca option:selected').val();
+        nProduct.tipo = $('#inputTipo option:selected').val();
+        nProduct.category = $('#inputCategoria option:selected').val();
+
+        console.log(nProduct);
+        
+        
+
+        // $("#img").attr("src", productImg);
+        // $('#productName').val(productName);
+        // $('#productDescription').val(productDescription);
+        // $('#productPrice').val(productPrice);
+        // $('#inputMarca option:selected').text(productMarca)
+        // $('#inputTipo option:selected').text(productTipo)
+        // $('#inputCategoria option:selected').text(productCategoria)
+
+
+
+    })
+
+
+
+
+
+
 
     $('body').on('click','#updateProduct',function(){
         let newProductName = $('#productName').val();
@@ -93,7 +172,7 @@ $('.editProduct').click(function(){
                             }).then((result) => {
                                 if (result.value) {
                                     
-                                    $('#staticBackdrop').modal('hide')
+                                    $('#modalProduct').modal('hide')
                                     //Ejecutar AJAX
                                     // $(this).parent().parent().fadeOut();
                                     // Swal.fire(
@@ -105,33 +184,48 @@ $('.editProduct').click(function(){
                             })
 
         }else{
-            $('#staticBackdrop').modal('hide')
+            $('#modalProduct').modal('hide')
         }
     });
 
 
-    // $('body').on('change', '#file',function(){
-    //     var fd = new FormData();
-    //     var files = $('#file')[0].files[0];
-    //     fd.append('file',files);
+    $('body').on('change', '#file',function(){
+        var property = document.getElementById("file").files[0];
+        var image_name = property.name;
+        var  image_extension = image_name.split('.').pop().toLowerCase();
 
-    //     $.ajax({
-    //         url: 'php/uploadImage.php',
-    //         type: 'post',
-    //         data: fd,
-    //         contentType: false,
-    //         processData: false,
-    //         success: function(response){
-    //             if(response != 0){
-    //                 $("#img").attr("src",response); 
-    //                 $(".preview img").show(); // Display image element
-    //             }else{
-    //                 alert('file not uploaded');
-    //             }
-    //         },
-    //     });
+        if(jQuery.inArray(image_extension, ['gif','png','jpg','jpeg']) == -1){
 
-    // })
+            alert("Invalid image file");
+        }
+
+        var image_size = property.size;
+
+        if(image_size > 2000000){
+            alert("Image File size is very big");
+        }else{
+            var form_data = new FormData();
+            form_data.append("file",property);
+
+            $.ajax({
+                url: 'php/uploadImage.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    if(response != 0){
+                        console.log(response)
+                        // $("#img").attr("src",response); 
+                        $('#imgContainer').html(response);
+                        // $(".preview img").show(); // Display image element
+                    }else{
+                        alert('file not uploaded');
+                    }
+                },
+            });
+        }
+    })
 
 
 })

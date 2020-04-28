@@ -26,9 +26,14 @@
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <link href="css/productos.css" rel="stylesheet">
+
+  
+
 </head>
 
 <body id="page-top">
+  
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -52,7 +57,9 @@
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
+            
             <div class="card-body">
+            <button class="btn btn-primary addProduct" data-toggle="modal" data-target="#modalProduct"><i class="fas fa-plus"></i></button>
             <?php
             $productos = producto::getProducts();
             $marcas = producto:: getBrands();
@@ -60,6 +67,7 @@
             $categorias = producto:: getCategories();
             if(count($productos) > 0){ ?>
               <div class="table-responsive">
+              
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -74,7 +82,11 @@
                       <th></th>
                     </tr>
                   </thead>
+                  
                   <tbody>
+                  <div class="loaderSpinner">
+                      <i class="fas fa-spinner fa-spin"></i>
+                  </div>
                         <?php for ($i=0; $i < count($productos); $i++) { ?>
                         <tr>
                             <td><?php echo $productos[$i]->nombre;?></td>
@@ -116,7 +128,7 @@
                                 <button class="btn btn-danger btn-circle deleteProduct">
                                         <i class="fas fa-trash"></i>
                                 </button>
-                                <button class="btn btn-warning btn-circle editProduct" data-toggle="modal" data-target="#staticBackdrop">
+                                <button class="btn btn-warning btn-circle editProduct" data-toggle="modal" data-target="#modalProduct">
                                         <i class="fas fa-exclamation-triangle"></i>
                                 </button>
                             </td>  
@@ -174,11 +186,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalProduct" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalProductLabel" aria-hidden="true">
   <div style="max-width: 75%;" class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Edición de producto</h5>
+        <h5 class="modal-title" id="modalProductLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -193,9 +205,15 @@
               <label for="descripcion">Descripción</label>
               <input type="text" class="form-control" id="productDescription">
             </div>
-            <div class="form-group">
-              <label for="precio">Precio</label>
-              <input type="text" class="form-control" id="productPrice">
+            <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="precio">Precio</label>
+                  <input type="text" class="form-control" id="productPrice">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="precio">Stock</label>
+                  <input type="text" class="form-control" id="productStock">
+                </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -240,10 +258,12 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <button id="updateProduct" type="button" class="btn btn-success">Cambiar</button>
+        <button id="addProduct" type="button" class="btn btn-primary">Aceptar</button>
       </div>
     </div>
   </div>
 </div>
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
