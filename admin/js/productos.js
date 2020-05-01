@@ -14,28 +14,19 @@ $(document).ready(function(){
     var editProduct = false;
 
 
-
-
-
-
-// Funciones
-$('.addProduct').click(function(){
-    console.log("Agregar producto");
-    $('#productName').val('');
-    $('#productDescription').val('');
-    $('#productPrice').val('');
-    $('#file').val('');
-    $("#img").attr("src", '');
-    $('#inputMarca').val('');
-    $('#inputTipo').val('');
-    $('#inputCategoria').val('');
-
-
-    $('#updateProduct').css("display","none");
-    $('#addProduct').css("display","block");
-    
-})
-
+    //Objeto producto
+    product = {
+        name: String,
+        description: String,
+        price: String,
+        stock:String,
+        img: String,
+        stock: String,
+        img: String,
+        brand: String,
+        type: String,
+        category: String,
+    }
 
 
 
@@ -100,39 +91,50 @@ $('.editProduct').click(function(){
 
 
 
+
+    $('.addProduct').click(function(){
+        $('#productName').val('');
+        $('#productDescription').val('');
+        $('#productPrice').val('');
+        $('#productStock').val('');
+        $("#img").attr("src", '');
+        $('#inputMarca option:selected').text('')
+        $('#inputTipo option:selected').text('')
+        $('#inputCategoria option:selected').text('')
+    })
+
+
     $('body').on('click','#addProduct',function(){
+        product.name = $('#productName').val();
+        product.description = $('#productDescription').val();
+        product.price = $('#productPrice').val();
+        product.img = $('#imgContainer>img').attr('src').substr(3);
+        product.stock = $('#productStock').val();
+        product.brand = $('#inputMarca').val();
+        product.type = $('#inputTipo').val();
+        product.category = $('#inputCategoria').val();
+        
+        if(product.name != "" && product.description != "" && product.price != "" && product.stock != "" && product.img != "" && product.brand != "" && product.type != "" && product.category != "")
+        {
+            $.ajax({
+                type: 'POST',
+                url: '../php/script/producto/altaProducto.php',
+                data: {product},
+                beforeSend: function(){
+                    console.log("Cargando...");
+                    lockbuttons();
+                },
+                success: function(data){
+                    $('#modalProduct').modal('hide');
+                    actualizarListaInstrumentos();
+                }
 
-        nProduct = {
-            name: String,
-            description: String,
-            price: String,
-            img: String,
-            stock: String,
-            marca: String,
-            tipo: String,
-            category: String,
+            })
+        }else{
+            console.log("Alguno de los campos se encuentra vacio");
         }
-        
-        nProduct.name = $('#productName').val();
-        nProduct.description = $('#productDescription').val();
-        nProduct.price = $('#productPrice').val();
-        // nProduct.img = $('.productImg').attr('src');
-        nProduct.stock = $('#inputStock').val();
-        nProduct.marca = $('#inputMarca option:selected').val();
-        nProduct.tipo = $('#inputTipo option:selected').val();
-        nProduct.category = $('#inputCategoria option:selected').val();
 
-        console.log(nProduct);
-        
-        
 
-        // $("#img").attr("src", productImg);
-        // $('#productName').val(productName);
-        // $('#productDescription').val(productDescription);
-        // $('#productPrice').val(productPrice);
-        // $('#inputMarca option:selected').text(productMarca)
-        // $('#inputTipo option:selected').text(productTipo)
-        // $('#inputCategoria option:selected').text(productCategoria)
 
 
 
@@ -226,6 +228,57 @@ $('.editProduct').click(function(){
             });
         }
     })
+
+
+    function lockbuttons(){
+        $('#updateProduct').attr("disabled", true);
+        $('#addProduct').attr("disabled", true);
+        $('#cancelProduct').attr("disabled", true);
+        $('.fa-spin').css("display","block")
+    }
+
+    function unLockbuttons(){
+        $('#updateProduct').attr("disabled", false);
+        $('#addProduct').attr("disabled", false);
+        $('#cancelProduct').attr("disabled", false);
+        $('.fa-spin').css("display","none")
+    }
+
+
+    function actualizarListaInstrumentos(){
+        $.ajax({
+            url: '../php/script/producto/obtenerInstrumentos.php',
+            beforeSend: function(){
+                $('.capa').fadeIn();
+            },
+            success: function(data){
+                $('.capa').fadeOut();
+                console.log(data);
+                let instruments = JSON.parse(data);
+                console.log("Mostrar lista: ", instruments);
+                $('#tbodyProducts').html('');
+                for (let i=0; i < instruments.length; i++){
+                    $('#tbodyProducts').append(`<tr>
+                                                    <td>${instruments[i]['nombre']}</td>
+                                                    <td>${instruments[i]['descripcion']}</td>
+                                                    <td>${instruments[i]['precio']}</td>
+                                                    <td style="width:10%;"  ><img class="productImg" style="width:100%;" src="../${instruments[i]['imagen']}" alt=""></td>
+                                                    <td>${instruments[i]['stock']}</td>
+                                                    <td>${instruments[i]['idMarca']}</td>
+                                                    <td>${instruments[i]['idTipoInstrumento']}</td>
+                                                    <td>${instruments[i]['idCategoria']}</td>
+                                                </tr>`);
+                 }
+                
+
+            }
+
+        })
+    }
+
+
+
+
 
 
 })

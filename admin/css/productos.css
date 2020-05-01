@@ -21,3 +21,20 @@
     margin-left: auto !important;
     margin-bottom: 1%;
 }
+
+.fa-spin{
+    position: absolute;
+    left: 2%;
+    font-size: 35px;
+    color: #4e73df;
+    display: none;
+}
+
+.capa{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #dddfeb87;
+    z-index: 2;
+    display: none;
+}

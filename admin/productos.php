@@ -66,7 +66,9 @@
             $tipoIntrumentos = producto:: getIntrumentTypes();
             $categorias = producto:: getCategories();
             if(count($productos) > 0){ ?>
-              <div class="table-responsive">
+              <div style="position:relative;" class="table-responsive">
+              <div class="capa">
+              </div>
               
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -83,7 +85,7 @@
                     </tr>
                   </thead>
                   
-                  <tbody>
+                  <tbody id="tbodyProducts">
                   <div class="loaderSpinner">
                       <i class="fas fa-spinner fa-spin"></i>
                   </div>
@@ -208,11 +210,11 @@
             <div class="row">
                 <div class="form-group col-md-6">
                   <label for="precio">Precio</label>
-                  <input type="text" class="form-control" id="productPrice">
+                  <input type="number" class="form-control" id="productPrice">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="precio">Stock</label>
-                  <input type="text" class="form-control" id="productStock">
+                  <input type="number" class="form-control" id="productStock">
                 </div>
             </div>
             <div class="row">
@@ -230,7 +232,7 @@
                     <select id="inputMarca" class="form-control">
                       <option selected></option>
                       <?php for ($i=0; $i < count($marcas) ; $i++) {  ?>
-                        <option> <?php echo $marcas[$i]->descripcion; ?> </option>
+                        <option value="<?php echo $marcas[$i]->id ?>"> <?php echo $marcas[$i]->descripcion; ?> </option>
                         <?php }  ?>
                     </select>
                 </div>
@@ -239,7 +241,7 @@
                     <select id="inputTipo" class="form-control">
                       <option selected>Choose...</option>
                       <?php for ($i=0; $i < count($tipoIntrumentos) ; $i++) {  ?>
-                        <option> <?php echo $tipoIntrumentos[$i]->descripcion; ?> </option>
+                        <option value="<?php echo $tipoIntrumentos[$i]->id ?>"> <?php echo $tipoIntrumentos[$i]->descripcion; ?> </option>
                         <?php }  ?>
                     </select>
                 </div>
@@ -248,7 +250,7 @@
                     <select id="inputCategoria" class="form-control">
                       <option selected>Choose...</option>
                       <?php for ($i=0; $i < count($categorias) ; $i++) {  ?>
-                        <option> <?php echo $categorias[$i]->descripcion; ?> </option>
+                        <option value="<?php echo $categorias[$i]->id ?>"> <?php echo $categorias[$i]->descripcion; ?> </option>
                         <?php }  ?>
                     </select>
                 </div>
@@ -256,7 +258,8 @@
       </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <i class="fas fa-circle-notch fa-spin"></i>
+        <button id="cancelProduct" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <button id="updateProduct" type="button" class="btn btn-success">Cambiar</button>
         <button id="addProduct" type="button" class="btn btn-primary">Aceptar</button>
       </div>

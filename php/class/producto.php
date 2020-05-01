@@ -114,17 +114,7 @@ class producto {
 
 
 
-    public static function createProduct($name,$description,$image,$price,$idBrand,$idIntrument){
-        include "../conexion.php";
-        if($stmt = $conn->query("INSERT INTO Productos (nombre, descripcion, precio, imagen, stock, id-marca, id-intrumento) VALUES ('$name', '$description', '$image', '$price', '$idBrand', '$idInstrument')") == TRUE){
-            return "Usuario registrado correctamente";
-            
-        }else{
-            return "Error, mostrando consulta: "."INSERT INTO Productos (nombre, descripcion, precio, imagen, stock, 'id-marca', 'id-intrumento') VALUES ('$name', '$description', '$image', '$price', '$idBrand', '$idIntrument')";
-            
-        }
 
-    }
 
     public static function registerPurchase ($products, $userID){
         include "../conexion.php";
@@ -280,6 +270,26 @@ class producto {
             }
         
         return $array_products;
+    }
+
+    public static function insertProduct($product){
+        include "../conexion.php";
+
+        $name = $product['name'];
+        $description = $product['description'];
+        $price = $product['price'];
+        $stock = $product['stock'];
+        $img = $product['img'];
+        $brand = $product['brand'];
+        $type = $product['type'];
+        $category = $product['category'];
+        $sql = "INSERT INTO Instrumentos (nombre, descripcion, precio, imagen, stock, idMarca, idTipoInstrumento, idCategoria) VALUES ('$name','$description',$price,'$img',$stock,$brand,$type,$category)";
+        
+        if(mysqli_query($conn,$sql)){
+            return "Se creo nuevo producto";
+        }else{
+            return $sql;
+        }
     }
     
 }
