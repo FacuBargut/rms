@@ -26,6 +26,8 @@
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <link href="css/productos.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -60,6 +62,7 @@
             $categorias = producto:: getCategories();
             if(count($productos) > 0){ ?>
               <div class="table-responsive">
+                  <button class="btn btn-primary addProduct"><i class="fa fa-plus"></i></button>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
