@@ -1,37 +1,22 @@
 $(document).ready(function(){
-
-
-    var globalProductName = "";
-    var globalProductDescription = "";
-    var globalProductPrice = "";
-    var globalProductImg = "";
-    var globalProductMarca = "";
-    var globalProductStock = "";
-    var globalProductTipo = "";
-    var globalProductCategoria = "";
-
-
-    var editProduct = false;
-
+    
+    var editClient = false;
 
     //Objeto producto
-    product = {
+    client = {
         name: String,
-        description: String,
-        price: String,
-        stock:String,
-        img: String,
-        stock: String,
-        img: String,
-        brand: String,
-        type: String,
-        category: String,
+        surname: String,
+        mail: String,
+        password:String,
+        active: Boolean,
+        admin: Boolean,
+        telephone: String,
     }
 
 
 
 
-$('.deleteProduct').click(function(){
+$('.deleteClient').click(function(){
     var _this = $(this);
     console.log("Eliminando producto");
     Swal.fire({
@@ -45,12 +30,12 @@ $('.deleteProduct').click(function(){
         cancelButtonText: 'Cancelar'
       }).then((result) => {
         if (result.value) {
-            let idProduct = $(this).parent().parent().attr('data-id');
-            console.log(idProduct);
+            let idClient = $(this).parent().parent().attr('data-id');
+            console.log(idClient);
             $.ajax({
                 type: 'POST',
-                url: '../php/script/producto/bajaProducto.php',
-                data: {idProduct},
+                url: '../php/script/producto/bajaCliento.php',
+                data: {idClient},
                 success: function(data){
                     console.log(data);
                     if (data.trim() === "El producto se elimino correctamente"){
@@ -76,25 +61,25 @@ $('.deleteProduct').click(function(){
 })
 
 
-$('.editProduct').click(function(){
+$('.editClient').click(function(){
     console.log("Editando producto");
 
     let productName = $(this).parent().parent().children('tr > td:nth-child(1)').text();
-    globalProductName = productName;
+    globalClientName = productName;
     let productDescription = $(this).parent().parent().children('tr > td:nth-child(2)').text();
-    globalProductDescription = productDescription
+    globalClientDescription = productDescription
     let productPrice = $(this).parent().parent().children('tr > td:nth-child(3)').text();
-    globalProductPrice = productPrice;
+    globalClientPrice = productPrice;
     let productImg = $('.productImg').attr('src');
-    globalProductImg = productImg;
+    globalClientImg = productImg;
     let productStock = $(this).parent().parent().children('tr > td:nth-child(5)').text();
-    globalProductStock = productStock
+    globalClientStock = productStock
     let productMarca = $(this).parent().parent().children('tr > td:nth-child(6)').text();
-    globalProductMarca = productMarca.trim();
+    globalClientMarca = productMarca.trim();
     let productTipo = $(this).parent().parent().children('tr > td:nth-child(7)').text();
-    globalProductTipo = productTipo.trim();
+    globalClientTipo = productTipo.trim();
     let productCategoria = $(this).parent().parent().children('tr > td:nth-child(8)').text();
-    globalProductCategoria = productCategoria.trim();
+    globalClientCategoria = productCategoria.trim();
 
     $("#img").attr("src", productImg);
     $('#productName').val(productName);
@@ -104,49 +89,56 @@ $('.editProduct').click(function(){
     $('#inputTipo option:selected').text(productTipo)
     $('#inputCategoria option:selected').text(productCategoria)
 
-    $('#updateProduct').css("display","block");
-    $('#addProduct').css("display","none");
+    $('#updateClient').css("display","block");
+    $('#addClient').css("display","none");
 })
 
 
 
 
+    //Abrir modal de alta cliente
+    $('.addClient').click(function(){
+        $('#clientName').val('');
+        $('#clientDescription').val('');
+        $('#clientPassword').val('');
+        $('#clientPassword').val('');
+        $('#activeSwitch').prop('checked',false);
+        $('#adminSwitch').prop('checked',false);
+        $('#clientTelefono').val('');
 
-    $('.addProduct').click(function(){
-        $('#productName').val('');
-        $('#productDescription').val('');
-        $('#productPrice').val('');
-        $('#productStock').val('');
-        $("#img").attr("src", '');
-        $('#inputMarca option:selected').text('')
-        $('#inputTipo option:selected').text('')
-        $('#inputCategoria option:selected').text('')
+        $("#modalClient").on('shown.bs.modal', function(){
+            $(this).find('#clientName').focus();
+        });
+
+        $('#updateProduct').css("display","none");
     })
 
 
-    $('body').on('click','#addProduct',function(){
-        product.name = $('#productName').val();
-        product.description = $('#productDescription').val();
-        product.price = $('#productPrice').val();
-        product.img = $('#imgContainer>img').attr('src').substr(3);
-        product.stock = $('#productStock').val();
-        product.brand = $('#inputMarca').val();
-        product.type = $('#inputTipo').val();
-        product.category = $('#inputCategoria').val();
+    $('body').on('click','#addClient',function(){
+
+        client.name = $('#clientName').val();
+        client.surname = $('#clientDescription').val();
+        client.password = $('#clientPassword').val();
+        client.active = $('#activeSwitch').val();
+        client.admin = $('#adminSwitch').val();
+        client.telephone = $('#clientTelefono').val();
+       
+       
         
-        if(product.name != "" && product.description != "" && product.price != "" && product.stock != "" && product.img != "" && product.brand != "" && product.type != "" && product.category != "")
+        if(client.name != "" && client.surname != "" && client.password != "" && client.active != "" && client.admin != "" && client.telephone != "")
         {
             $.ajax({
                 type: 'POST',
-                url: '../php/script/producto/altaProducto.php',
-                data: {product},
+                url: '../php/script/producto/altaCliente.php',
+                data: {client},
                 beforeSend: function(){
                     console.log("Cargando...");
                     lockbuttons();
                 },
                 success: function(data){
-                    $('#modalProduct').modal('hide');
-                    actualizarListaInstrumentos();
+                    console.log(data);
+                    $('#modalClient').modal('hide');
+                    actualizarListaClientes();
                 }
 
             })
@@ -166,24 +158,24 @@ $('.editProduct').click(function(){
 
 
 
-    $('body').on('click','#updateProduct',function(){
-        let newProductName = $('#productName').val();
-        let newProductDescription = $('#productDescription').val();
-        let newProductPrice = $('#productPrice').val();
-        let newProductMarca = $('#inputMarca').val();
-        let newProductType = $('#inputTipo').val();
-        let newProductCategory = $('#inputCategoria').val();
+    $('body').on('click','#updateClient',function(){
+        let newClientName = $('#productName').val();
+        let newClientDescription = $('#productDescription').val();
+        let newClientPrice = $('#productPrice').val();
+        let newClientMarca = $('#inputMarca').val();
+        let newClientType = $('#inputTipo').val();
+        let newClientCategory = $('#inputCategoria').val();
 
-        if(newProductName !== globalProductName ||
-           newProductDescription  !== globalProductDescription ||
-           newProductPrice !== globalProductPrice ||
-           newProductMarca !== globalProductMarca ||
-           newProductType !== globalProductTipo ||
-           newProductCategory !== globalProductCategoria
+        if(newClientName !== globalClientName ||
+           newClientDescription  !== globalClientDescription ||
+           newClientPrice !== globalClientPrice ||
+           newClientMarca !== globalClientMarca ||
+           newClientType !== globalClientTipo ||
+           newClientCategory !== globalClientCategoria
             
             ){
                 Swal.fire({
-                            title: 'Producto modificado',
+                            title: 'Cliento modificado',
                             text: "Desea continuar con la modificación del producto",
                             icon: 'warning',
                             showCancelButton: true,
@@ -194,7 +186,7 @@ $('.editProduct').click(function(){
                             }).then((result) => {
                                 if (result.value) {
                                     
-                                    $('#modalProduct').modal('hide')
+                                    $('#modalClient').modal('hide')
                                     //Ejecutar AJAX
                                     // $(this).parent().parent().fadeOut();
                                     // Swal.fire(
@@ -206,7 +198,7 @@ $('.editProduct').click(function(){
                             })
 
         }else{
-            $('#modalProduct').modal('hide')
+            $('#modalClient').modal('hide')
         }
     });
 
@@ -251,16 +243,16 @@ $('.editProduct').click(function(){
 
 
     function lockbuttons(){
-        $('#updateProduct').attr("disabled", true);
-        $('#addProduct').attr("disabled", true);
-        $('#cancelProduct').attr("disabled", true);
+        $('#updateClient').attr("disabled", true);
+        $('#addClient').attr("disabled", true);
+        $('#cancelClient').attr("disabled", true);
         $('.fa-spin').css("display","block")
     }
 
     function unLockbuttons(){
-        $('#updateProduct').attr("disabled", false);
-        $('#addProduct').attr("disabled", false);
-        $('#cancelProduct').attr("disabled", false);
+        $('#updateClient').attr("disabled", false);
+        $('#addClient').attr("disabled", false);
+        $('#cancelClient').attr("disabled", false);
         $('.fa-spin').css("display","none")
     }
 
@@ -280,9 +272,9 @@ $('.editProduct').click(function(){
                 console.log(data);
                 let instruments = JSON.parse(data);
                 console.log("Mostrar lista: ", instruments);
-                $('#tbodyProducts').html('');
+                $('#tbodyClients').html('');
                 for (let i=0; i < instruments.length; i++){
-                    $('#tbodyProducts').append(`<tr>
+                    $('#tbodyClients').append(`<tr>
                                                     <td>${instruments[i]['nombre']}</td>
                                                     <td>${instruments[i]['descripcion']}</td>
                                                     <td>${instruments[i]['precio']}</td>
@@ -298,11 +290,4 @@ $('.editProduct').click(function(){
             }
 
         })
-    }
-
-
-
-
-
-
-})
+    }})

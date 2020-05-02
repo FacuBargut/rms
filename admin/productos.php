@@ -28,11 +28,8 @@
 
   <link href="css/productos.css" rel="stylesheet">
 
-<<<<<<< HEAD
-=======
   
 
->>>>>>> 6455bf7c6546b273b8658d7738a6f6b0fec0844f
 </head>
 
 <body id="page-top">
@@ -69,15 +66,10 @@
             $tipoIntrumentos = producto:: getIntrumentTypes();
             $categorias = producto:: getCategories();
             if(count($productos) > 0){ ?>
-<<<<<<< HEAD
-              <div class="table-responsive">
-                  <button class="btn btn-primary addProduct"><i class="fa fa-plus"></i></button>
-=======
               <div style="position:relative;" class="table-responsive">
               <div class="capa">
               </div>
               
->>>>>>> 6455bf7c6546b273b8658d7738a6f6b0fec0844f
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -98,7 +90,7 @@
                       <i class="fas fa-spinner fa-spin"></i>
                   </div>
                         <?php for ($i=0; $i < count($productos); $i++) { ?>
-                        <tr>
+                        <tr data-id="<?php echo $productos[$i]->id; ?>">
                             <td><?php echo $productos[$i]->nombre;?></td>
                             <td><?php echo $productos[$i]->descripcion;?></td>
                             <td><?php echo $productos[$i]->precio;?></td>

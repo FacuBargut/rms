@@ -283,10 +283,23 @@ class producto {
         $brand = $product['brand'];
         $type = $product['type'];
         $category = $product['category'];
-        $sql = "INSERT INTO Instrumentos (nombre, descripcion, precio, imagen, stock, idMarca, idTipoInstrumento, idCategoria) VALUES ('$name','$description',$price,'$img',$stock,$brand,$type,$category)";
+        $sql = "INSERT INTO instrumentos (nombre, descripcion, precio, imagen, stock, idMarca, idTipoInstrumento, idCategoria) VALUES ('$name','$description',$price,'$img',$stock,$brand,$type,$category)";
         
         if(mysqli_query($conn,$sql)){
             return "Se creo nuevo producto";
+        }else{
+            return $sql;
+        }
+    }
+
+
+    public static function deleteProduct($idProduct){
+        include "../conexion.php";
+
+        $sql = "DELETE FROM instrumentos WHERE id = $idProduct";
+        
+        if(mysqli_query($conn,$sql)){
+            return "El producto se elimino correctamente";
         }else{
             return $sql;
         }

@@ -28,6 +28,8 @@
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <link href="css/clientes.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -55,6 +57,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-body">
+            <button class="btn btn-primary addClient" data-toggle="modal" data-target="#modalClient"><i class="fas fa-plus"></i></button>
             <?php
             $usuarios = usuario::getUsers();
             if(count($usuarios) > 0){ ?>
@@ -69,7 +72,8 @@
                       <th>Activo</th>
                       <th>Administrator</th>
                       <th>Telefono</th>
-                    </tr>
+                      <th></th>
+
                   </thead>
                   <tbody>
                         <?php for ($i=0; $i < count($usuarios); $i++) { ?>
@@ -95,6 +99,14 @@
                                  ?>
                             </td>
                             <td><?php echo $usuarios[$i]->telefono;?></td>
+                            <td>
+                            <button class="btn btn-danger btn-circle deleteClient">
+                                        <i class="fas fa-trash"></i>
+                                </button>
+                                <button class="btn btn-warning btn-circle editClient" data-toggle="modal" data-target="#modalClient">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                </button>
+                            </td>
                           </tr>
                         <?php } ?>
                   </tbody>
@@ -126,7 +138,7 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -141,7 +153,64 @@
           <a class="btn btn-primary" href="login.php">Logout</a>
         </div>
       </div>
+    </div> -->
+    <div class="modal fade" id="modalClient" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalClientLabel" aria-hidden="true">
+  <div style="max-width: 75%;" class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalClientLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form>
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" class="form-control" id="clientName" aria-describedby="Nombre del producto">
+            </div>
+            <div class="form-group">
+              <label for="apellido">Apellido</label>
+              <input type="text" class="form-control" id="clientDescription">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="mail">Mail</label>
+                  <input type="text" class="form-control" id="clientPassword">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="precio">Contraseña</label>
+                  <input type="password" class="form-control" id="clientPassword">
+                </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                  <div class="custom-control custom-switch form-group">
+                      <input type="checkbox" class="custom-control-input" id="activeSwitch">
+                      <label class="custom-control-label" for="activeSwitch">Activo</label>
+                  </div>
+                  <div class="custom-control custom-switch form-group">
+                    <input type="checkbox" class="custom-control-input" id="adminSwitch">
+                    <label class="custom-control-label" for="adminSwitch">Administrador</label>
+                  </div>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="telefono">Telefono</label>
+                  <input type="text" class="form-control" id="clientTelefono">
+              </div>
+            </div>
+
+      </form>
+      </div>
+      <div class="modal-footer">
+        <i class="fas fa-circle-notch fa-spin"></i>
+        <button id="cancelProduct" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="updateProduct" type="button" class="btn btn-success">Cambiar</button>
+        <button id="addProduct" type="button" class="btn btn-primary">Aceptar</button>
+      </div>
     </div>
+  </div>
+</div>
   </div>
 
   <!-- Bootstrap core JavaScript-->
@@ -160,6 +229,12 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+
+  <!-- Script creado por mi -->
+  <script src="js/clientes.js"></script>
+
+  <!-- sweetalert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 </body>
 
