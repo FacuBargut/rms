@@ -28,9 +28,15 @@
 
   <link href="css/productos.css" rel="stylesheet">
 
+<<<<<<< HEAD
+=======
+  
+
+>>>>>>> 6455bf7c6546b273b8658d7738a6f6b0fec0844f
 </head>
 
 <body id="page-top">
+  
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -54,15 +60,24 @@
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
+            
             <div class="card-body">
+            <button class="btn btn-primary addProduct" data-toggle="modal" data-target="#modalProduct"><i class="fas fa-plus"></i></button>
             <?php
             $productos = producto::getProducts();
             $marcas = producto:: getBrands();
             $tipoIntrumentos = producto:: getIntrumentTypes();
             $categorias = producto:: getCategories();
             if(count($productos) > 0){ ?>
+<<<<<<< HEAD
               <div class="table-responsive">
                   <button class="btn btn-primary addProduct"><i class="fa fa-plus"></i></button>
+=======
+              <div style="position:relative;" class="table-responsive">
+              <div class="capa">
+              </div>
+              
+>>>>>>> 6455bf7c6546b273b8658d7738a6f6b0fec0844f
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -77,7 +92,11 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody>
+                  
+                  <tbody id="tbodyProducts">
+                  <div class="loaderSpinner">
+                      <i class="fas fa-spinner fa-spin"></i>
+                  </div>
                         <?php for ($i=0; $i < count($productos); $i++) { ?>
                         <tr>
                             <td><?php echo $productos[$i]->nombre;?></td>
@@ -119,7 +138,7 @@
                                 <button class="btn btn-danger btn-circle deleteProduct">
                                         <i class="fas fa-trash"></i>
                                 </button>
-                                <button class="btn btn-warning btn-circle editProduct" data-toggle="modal" data-target="#staticBackdrop">
+                                <button class="btn btn-warning btn-circle editProduct" data-toggle="modal" data-target="#modalProduct">
                                         <i class="fas fa-exclamation-triangle"></i>
                                 </button>
                             </td>  
@@ -177,11 +196,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalProduct" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalProductLabel" aria-hidden="true">
   <div style="max-width: 75%;" class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Edición de producto</h5>
+        <h5 class="modal-title" id="modalProductLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -196,9 +215,15 @@
               <label for="descripcion">Descripción</label>
               <input type="text" class="form-control" id="productDescription">
             </div>
-            <div class="form-group">
-              <label for="precio">Precio</label>
-              <input type="text" class="form-control" id="productPrice">
+            <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="precio">Precio</label>
+                  <input type="number" class="form-control" id="productPrice">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="precio">Stock</label>
+                  <input type="number" class="form-control" id="productStock">
+                </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -215,7 +240,7 @@
                     <select id="inputMarca" class="form-control">
                       <option selected></option>
                       <?php for ($i=0; $i < count($marcas) ; $i++) {  ?>
-                        <option> <?php echo $marcas[$i]->descripcion; ?> </option>
+                        <option value="<?php echo $marcas[$i]->id ?>"> <?php echo $marcas[$i]->descripcion; ?> </option>
                         <?php }  ?>
                     </select>
                 </div>
@@ -224,7 +249,7 @@
                     <select id="inputTipo" class="form-control">
                       <option selected>Choose...</option>
                       <?php for ($i=0; $i < count($tipoIntrumentos) ; $i++) {  ?>
-                        <option> <?php echo $tipoIntrumentos[$i]->descripcion; ?> </option>
+                        <option value="<?php echo $tipoIntrumentos[$i]->id ?>"> <?php echo $tipoIntrumentos[$i]->descripcion; ?> </option>
                         <?php }  ?>
                     </select>
                 </div>
@@ -233,7 +258,7 @@
                     <select id="inputCategoria" class="form-control">
                       <option selected>Choose...</option>
                       <?php for ($i=0; $i < count($categorias) ; $i++) {  ?>
-                        <option> <?php echo $categorias[$i]->descripcion; ?> </option>
+                        <option value="<?php echo $categorias[$i]->id ?>"> <?php echo $categorias[$i]->descripcion; ?> </option>
                         <?php }  ?>
                     </select>
                 </div>
@@ -241,12 +266,15 @@
       </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <i class="fas fa-circle-notch fa-spin"></i>
+        <button id="cancelProduct" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <button id="updateProduct" type="button" class="btn btn-success">Cambiar</button>
+        <button id="addProduct" type="button" class="btn btn-primary">Aceptar</button>
       </div>
     </div>
   </div>
 </div>
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

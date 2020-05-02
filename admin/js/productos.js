@@ -10,7 +10,27 @@ $(document).ready(function(){
     var globalProductTipo = "";
     var globalProductCategoria = "";
 
-// Funciones
+
+    var editProduct = false;
+
+
+    //Objeto producto
+    product = {
+        name: String,
+        description: String,
+        price: String,
+        stock:String,
+        img: String,
+        stock: String,
+        img: String,
+        brand: String,
+        type: String,
+        category: String,
+    }
+
+
+
+
 $('.deleteProduct').click(function(){
     console.log("Eliminando producto");
     Swal.fire({
@@ -63,7 +83,68 @@ $('.editProduct').click(function(){
     $('#inputMarca option:selected').text(productMarca)
     $('#inputTipo option:selected').text(productTipo)
     $('#inputCategoria option:selected').text(productCategoria)
+
+    $('#updateProduct').css("display","block");
+    $('#addProduct').css("display","none");
 })
+
+
+
+
+
+    $('.addProduct').click(function(){
+        $('#productName').val('');
+        $('#productDescription').val('');
+        $('#productPrice').val('');
+        $('#productStock').val('');
+        $("#img").attr("src", '');
+        $('#inputMarca option:selected').text('')
+        $('#inputTipo option:selected').text('')
+        $('#inputCategoria option:selected').text('')
+    })
+
+
+    $('body').on('click','#addProduct',function(){
+        product.name = $('#productName').val();
+        product.description = $('#productDescription').val();
+        product.price = $('#productPrice').val();
+        product.img = $('#imgContainer>img').attr('src').substr(3);
+        product.stock = $('#productStock').val();
+        product.brand = $('#inputMarca').val();
+        product.type = $('#inputTipo').val();
+        product.category = $('#inputCategoria').val();
+        
+        if(product.name != "" && product.description != "" && product.price != "" && product.stock != "" && product.img != "" && product.brand != "" && product.type != "" && product.category != "")
+        {
+            $.ajax({
+                type: 'POST',
+                url: '../php/script/producto/altaProducto.php',
+                data: {product},
+                beforeSend: function(){
+                    console.log("Cargando...");
+                    lockbuttons();
+                },
+                success: function(data){
+                    $('#modalProduct').modal('hide');
+                    actualizarListaInstrumentos();
+                }
+
+            })
+        }else{
+            console.log("Alguno de los campos se encuentra vacio");
+        }
+
+
+
+
+
+    })
+
+
+
+
+
+
 
     $('body').on('click','#updateProduct',function(){
         let newProductName = $('#productName').val();
@@ -93,7 +174,7 @@ $('.editProduct').click(function(){
                             }).then((result) => {
                                 if (result.value) {
                                     
-                                    $('#staticBackdrop').modal('hide')
+                                    $('#modalProduct').modal('hide')
                                     //Ejecutar AJAX
                                     // $(this).parent().parent().fadeOut();
                                     // Swal.fire(
@@ -105,33 +186,99 @@ $('.editProduct').click(function(){
                             })
 
         }else{
-            $('#staticBackdrop').modal('hide')
+            $('#modalProduct').modal('hide')
         }
     });
 
 
-    // $('body').on('change', '#file',function(){
-    //     var fd = new FormData();
-    //     var files = $('#file')[0].files[0];
-    //     fd.append('file',files);
+    $('body').on('change', '#file',function(){
+        var property = document.getElementById("file").files[0];
+        var image_name = property.name;
+        var  image_extension = image_name.split('.').pop().toLowerCase();
 
-    //     $.ajax({
-    //         url: 'php/uploadImage.php',
-    //         type: 'post',
-    //         data: fd,
-    //         contentType: false,
-    //         processData: false,
-    //         success: function(response){
-    //             if(response != 0){
-    //                 $("#img").attr("src",response); 
-    //                 $(".preview img").show(); // Display image element
-    //             }else{
-    //                 alert('file not uploaded');
-    //             }
-    //         },
-    //     });
+        if(jQuery.inArray(image_extension, ['gif','png','jpg','jpeg']) == -1){
 
-    // })
+            alert("Invalid image file");
+        }
+
+        var image_size = property.size;
+
+        if(image_size > 2000000){
+            alert("Image File size is very big");
+        }else{
+            var form_data = new FormData();
+            form_data.append("file",property);
+
+            $.ajax({
+                url: 'php/uploadImage.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    if(response != 0){
+                        console.log(response)
+                        // $("#img").attr("src",response); 
+                        $('#imgContainer').html(response);
+                        // $(".preview img").show(); // Display image element
+                    }else{
+                        alert('file not uploaded');
+                    }
+                },
+            });
+        }
+    })
+
+
+    function lockbuttons(){
+        $('#updateProduct').attr("disabled", true);
+        $('#addProduct').attr("disabled", true);
+        $('#cancelProduct').attr("disabled", true);
+        $('.fa-spin').css("display","block")
+    }
+
+    function unLockbuttons(){
+        $('#updateProduct').attr("disabled", false);
+        $('#addProduct').attr("disabled", false);
+        $('#cancelProduct').attr("disabled", false);
+        $('.fa-spin').css("display","none")
+    }
+
+
+    function actualizarListaInstrumentos(){
+        $.ajax({
+            url: '../php/script/producto/obtenerInstrumentos.php',
+            beforeSend: function(){
+                $('.capa').fadeIn();
+            },
+            success: function(data){
+                $('.capa').fadeOut();
+                console.log(data);
+                let instruments = JSON.parse(data);
+                console.log("Mostrar lista: ", instruments);
+                $('#tbodyProducts').html('');
+                for (let i=0; i < instruments.length; i++){
+                    $('#tbodyProducts').append(`<tr>
+                                                    <td>${instruments[i]['nombre']}</td>
+                                                    <td>${instruments[i]['descripcion']}</td>
+                                                    <td>${instruments[i]['precio']}</td>
+                                                    <td style="width:10%;"  ><img class="productImg" style="width:100%;" src="../${instruments[i]['imagen']}" alt=""></td>
+                                                    <td>${instruments[i]['stock']}</td>
+                                                    <td>${instruments[i]['idMarca']}</td>
+                                                    <td>${instruments[i]['idTipoInstrumento']}</td>
+                                                    <td>${instruments[i]['idCategoria']}</td>
+                                                </tr>`);
+                 }
+                
+
+            }
+
+        })
+    }
+
+
+
+
 
 
 })
