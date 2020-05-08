@@ -28,7 +28,17 @@ $(document).ready(function(){
         category: String,
     }
 
-
+    function cleanObject(){
+        product.name = "";
+        product.description = "";
+        product.price = "";
+        product.stock = "";
+        product.img = "";
+        product.img = "";
+        product.brand = "";
+        product.type = "";
+        product.category = "";
+    }
 
 
 $('.deleteProduct').click(function(){
@@ -78,31 +88,29 @@ $('.deleteProduct').click(function(){
 
 $('.editProduct').click(function(){
     console.log("Editando producto");
+    cleanObject();
+    unLockbuttons();
+    console.log("Editando producto");
+    product.name = $(this).parent().parent().children('tr > td:nth-child(1)').text();
+    
+    product.description = $(this).parent().parent().children('tr > td:nth-child(2)').text();
+    
+    product.price = $(this).parent().parent().children('tr > td:nth-child(3)').text();
+    product.img = $('.productImg').attr('src');
+    product.stock = $(this).parent().parent().children('tr > td:nth-child(5)').text();
+    product.brand = $(this).parent().parent().children('tr > td:nth-child(6)').text();
+    
+    product.type = $(this).parent().parent().children('tr > td:nth-child(7)').text();
+    
+    product.category = $(this).parent().parent().children('tr > td:nth-child(8)').text();
 
-    let productName = $(this).parent().parent().children('tr > td:nth-child(1)').text();
-    globalProductName = productName;
-    let productDescription = $(this).parent().parent().children('tr > td:nth-child(2)').text();
-    globalProductDescription = productDescription
-    let productPrice = $(this).parent().parent().children('tr > td:nth-child(3)').text();
-    globalProductPrice = productPrice;
-    let productImg = $('.productImg').attr('src');
-    globalProductImg = productImg;
-    let productStock = $(this).parent().parent().children('tr > td:nth-child(5)').text();
-    globalProductStock = productStock
-    let productMarca = $(this).parent().parent().children('tr > td:nth-child(6)').text();
-    globalProductMarca = productMarca.trim();
-    let productTipo = $(this).parent().parent().children('tr > td:nth-child(7)').text();
-    globalProductTipo = productTipo.trim();
-    let productCategoria = $(this).parent().parent().children('tr > td:nth-child(8)').text();
-    globalProductCategoria = productCategoria.trim();
-
-    $("#img").attr("src", productImg);
-    $('#productName').val(productName);
-    $('#productDescription').val(productDescription);
-    $('#productPrice').val(productPrice);
-    $('#inputMarca option:selected').text(productMarca)
-    $('#inputTipo option:selected').text(productTipo)
-    $('#inputCategoria option:selected').text(productCategoria)
+    $("#img").attr("src", product.img);
+    $('#productName').val(product.name);
+    $('#productDescription').val(product.description);
+    $('#productPrice').val(product.price);
+    $('#inputMarca option:selected').text(product.brand)
+    $('#inputTipo option:selected').text(product.type)
+    $('#inputCategoria option:selected').text(product.category)
 
     $('#updateProduct').css("display","block");
     $('#addProduct').css("display","none");
@@ -113,6 +121,7 @@ $('.editProduct').click(function(){
 
 
     $('.addProduct').click(function(){
+        cleanObject();
         $('#productName').val('');
         $('#productDescription').val('');
         $('#productPrice').val('');
@@ -121,6 +130,14 @@ $('.editProduct').click(function(){
         $('#inputMarca option:selected').text('')
         $('#inputTipo option:selected').text('')
         $('#inputCategoria option:selected').text('')
+
+        $("#modalProduct").on('shown.bs.modal', function(){
+            $(this).find('#productName').focus();
+        });
+
+        $('#updateProduct').css("display","none");
+        $('#addProduct').css("display","block");
+        unLockbuttons();
     })
 
 
@@ -133,6 +150,8 @@ $('.editProduct').click(function(){
         product.brand = $('#inputMarca').val();
         product.type = $('#inputTipo').val();
         product.category = $('#inputCategoria').val();
+
+
         
         if(product.name != "" && product.description != "" && product.price != "" && product.stock != "" && product.img != "" && product.brand != "" && product.type != "" && product.category != "")
         {
@@ -145,6 +164,7 @@ $('.editProduct').click(function(){
                     lockbuttons();
                 },
                 success: function(data){
+                    console.log(data);
                     $('#modalProduct').modal('hide');
                     actualizarListaInstrumentos();
                 }
@@ -173,15 +193,23 @@ $('.editProduct').click(function(){
         let newProductMarca = $('#inputMarca').val();
         let newProductType = $('#inputTipo').val();
         let newProductCategory = $('#inputCategoria').val();
+        let idProduct = product.id;
 
-        if(newProductName !== globalProductName ||
-           newProductDescription  !== globalProductDescription ||
-           newProductPrice !== globalProductPrice ||
-           newProductMarca !== globalProductMarca ||
-           newProductType !== globalProductTipo ||
-           newProductCategory !== globalProductCategoria
+        if(newProductName !== product.name ||
+           newProductDescription  !== product.description ||
+           newProductPrice !== product.price ||
+           newProductMarca !== product.brand ||
+           newProductType !== product.type ||
+           newProductCategory !== product.category
             
             ){
+                cleanObject();
+                product.name = newProductName
+                product.description = newProductDescription
+                product.price = newProductPrice
+                product.brand = newProductMarca
+                product.type = newProductType
+                product.category = newProductCategory
                 Swal.fire({
                             title: 'Producto modificado',
                             text: "Desea continuar con la modificación del producto",
@@ -194,14 +222,23 @@ $('.editProduct').click(function(){
                             }).then((result) => {
                                 if (result.value) {
                                     
-                                    $('#modalProduct').modal('hide')
-                                    //Ejecutar AJAX
-                                    // $(this).parent().parent().fadeOut();
-                                    // Swal.fire(
-                                    //     'Eliminado con éxito.',
-                                    //     'El producto fue eliminado',
-                                    //     'success'
-                                    // )
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '../php/script/producto/modificarProducto.php',
+                                        data: {product,idProduct},
+                                        beforeSend: function(){
+                                            console.log("Cargando...");
+                                            $('.capa').fadeIn();
+                                            lockbuttons();
+                                        },
+                                        success: function(data){
+                                            console.log(data);
+                                            $('.capa').fadeOut();
+                                            $('#modalUser').modal('hide');
+                                            actualizarListaInstrumentos();
+                                        }
+                        
+                                    })
                                 }
                             })
 
@@ -270,7 +307,6 @@ $('.editProduct').click(function(){
             
             url: '../php/script/producto/obtenerInstrumentos.php',
             type: 'POST',
-            dataType : 'json',
             beforeSend: function(){
                 $('.capa').fadeIn();
             },
@@ -282,7 +318,7 @@ $('.editProduct').click(function(){
                 console.log("Mostrar lista: ", instruments);
                 $('#tbodyProducts').html('');
                 for (let i=0; i < instruments.length; i++){
-                    $('#tbodyProducts').append(`<tr>
+                    $('#tbodyProducts').append(`<tr data-id=${instruments[i]['id']}>
                                                     <td>${instruments[i]['nombre']}</td>
                                                     <td>${instruments[i]['descripcion']}</td>
                                                     <td>${instruments[i]['precio']}</td>
@@ -291,6 +327,14 @@ $('.editProduct').click(function(){
                                                     <td>${instruments[i]['idMarca']}</td>
                                                     <td>${instruments[i]['idTipoInstrumento']}</td>
                                                     <td>${instruments[i]['idCategoria']}</td>
+                                                    <td>
+                                                        <button class="btn btn-danger btn-circle deleteProduct">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    <button class="btn btn-warning btn-circle editProduct" data-toggle="modal" data-target="#modalProduct">
+                                                            <i class="fas fa-exclamation-triangle"></i>
+                                                    </button>
+                                                    </td>
                                                 </tr>`);
                  }
                 
@@ -301,6 +345,16 @@ $('.editProduct').click(function(){
     }
 
 
+    $('body').on('keyup','#productName',function(){
+        if($(this).val().length>0 && $(this).val().length<5){
+            $(this).val($(this).val().charAt(0).toUpperCase()+$(this).val().substr(1));
+        }
+    })
+    $('body').on('keyup','#productDescription',function(){
+        if($(this).val().length>0 && $(this).val().length<5){
+            $(this).val($(this).val().charAt(0).toUpperCase()+$(this).val().substr(1));
+        }
+    })
 
 
 

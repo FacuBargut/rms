@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Clientes</title>
+  <title>Usuarios</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +28,7 @@
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-  <link href="css/clientes.css" rel="stylesheet">
+  <link href="css/usuarios.css" rel="stylesheet">
 
 </head>
 
@@ -52,16 +52,18 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
+          <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-body">
-            <button class="btn btn-primary addClient" data-toggle="modal" data-target="#modalClient"><i class="fas fa-plus"></i></button>
+            <button class="btn btn-primary addUser" data-toggle="modal" data-target="#modalUser"><i class="fas fa-plus"></i></button>
             <?php
             $usuarios = usuario::getUsers();
             if(count($usuarios) > 0){ ?>
-              <div class="table-responsive">
+              <div style="position:relative;" class="table-responsive">
+              <div class="capa">
+              </div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -75,9 +77,9 @@
                       <th></th>
 
                   </thead>
-                  <tbody>
+                  <tbody id="tbodyUsers">
                         <?php for ($i=0; $i < count($usuarios); $i++) { ?>
-                        <tr>
+                        <tr data-id="<?php echo $usuarios[$i]->id;?>">
                             <td><?php echo $usuarios[$i]->nombre;?></td>
                             <td><?php echo $usuarios[$i]->apellido;?></td>
                             <td><?php echo $usuarios[$i]->email;?></td>
@@ -100,10 +102,10 @@
                             </td>
                             <td><?php echo $usuarios[$i]->telefono;?></td>
                             <td>
-                            <button class="btn btn-danger btn-circle deleteClient">
+                            <button class="btn btn-danger btn-circle deleteUser">
                                         <i class="fas fa-trash"></i>
                                 </button>
-                                <button class="btn btn-warning btn-circle editClient" data-toggle="modal" data-target="#modalClient">
+                                <button class="btn btn-warning btn-circle editUser" data-toggle="modal" data-target="#modalUser">
                                         <i class="fas fa-exclamation-triangle"></i>
                                 </button>
                             </td>
@@ -154,11 +156,11 @@
         </div>
       </div>
     </div> -->
-    <div class="modal fade" id="modalClient" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalClientLabel" aria-hidden="true">
+    <div class="modal fade" id="modalUser" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalUserLabel" aria-hidden="true">
   <div style="max-width: 75%;" class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalClientLabel"></h5>
+        <h5 class="modal-title" id="modalUserLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -167,20 +169,20 @@
       <form>
             <div class="form-group">
               <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" id="clientName" aria-describedby="Nombre del producto">
+              <input type="text" class="form-control" id="userName" aria-describedby="Nombre del producto">
             </div>
             <div class="form-group">
               <label for="apellido">Apellido</label>
-              <input type="text" class="form-control" id="clientDescription">
+              <input type="text" class="form-control" id="userSurname">
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
                   <label for="mail">Mail</label>
-                  <input type="text" class="form-control" id="clientPassword">
+                  <input type="text" class="form-control" id="userMail">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="precio">Contraseña</label>
-                  <input type="password" class="form-control" id="clientPassword">
+                  <input type="password" class="form-control" id="userPassword">
                 </div>
             </div>
             <div class="row">
@@ -196,7 +198,7 @@
               </div>
               <div class="form-group col-md-6">
                   <label for="telefono">Telefono</label>
-                  <input type="text" class="form-control" id="clientTelefono">
+                  <input type="text" class="form-control" id="userTelefono">
               </div>
             </div>
 
@@ -204,9 +206,9 @@
       </div>
       <div class="modal-footer">
         <i class="fas fa-circle-notch fa-spin"></i>
-        <button id="cancelProduct" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button id="updateProduct" type="button" class="btn btn-success">Cambiar</button>
-        <button id="addProduct" type="button" class="btn btn-primary">Aceptar</button>
+        <button id="cancelUser" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="updateUser" type="button" class="btn btn-success">Cambiar</button>
+        <button id="addUser" type="button" class="btn btn-primary">Aceptar</button>
       </div>
     </div>
   </div>
@@ -231,7 +233,7 @@
   <script src="js/demo/datatables-demo.js"></script>
 
   <!-- Script creado por mi -->
-  <script src="js/clientes.js"></script>
+  <script src="js/usuarios.js"></script>
 
   <!-- sweetalert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

@@ -295,8 +295,31 @@ class producto {
 
     public static function deleteProduct($idProduct){
         include "../conexion.php";
-
+        
         $sql = "DELETE FROM instrumentos WHERE id = $idProduct";
+        
+        if(mysqli_query($conn,$sql)){
+            return "El producto se elimino correctamente";
+        }else{
+            return $sql;
+        }
+    }
+
+    public static function modifyProduct($product, $idProduct){
+        include "../conexion.php";
+        $name = $product['name'];
+        $description = $product['description'];
+        $price = $product['price'];
+        $stock = $product['stock'];
+        $img = $product['img'];
+        $brand = $product['brand'];
+        $type = $product['type'];
+        $category = $product['category'];
+        
+
+
+
+        $sql = "UPDATE instrumentos (nombre,descripcion,precio,imagen,stock,idMarca,idTipoInstrumento,idCategoria) VALUES ('$name','$description','$price','$img','$stock',$brand,$type,$category)  WHERE id = $idProduct";
         
         if(mysqli_query($conn,$sql)){
             return "El producto se elimino correctamente";

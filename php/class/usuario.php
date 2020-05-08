@@ -93,12 +93,11 @@ class usuario {
 
     public static function createUser($name,$surname,$mail,$password,$active,$admin,$telephone){
         include "../conexion.php";
-        if($stmt = $conn->query("INSERT INTO Usuarios (nombre, apellido, email, password, activo, admin, telefono) VALUES ('$name', '$surname', '$mail', '$password', '$active', '$admin', '$telephone')") == TRUE){
+        if($stmt = $conn->query("INSERT INTO usuarios (nombre, apellido, email, password, activo, admin, telefono) VALUES ('$name', '$surname', '$mail', '$password', $active, $admin, '$telephone')") == TRUE){
             return "Usuario registrado correctamente";
             
         }else{
-            return "Error, mostrando consulta: "."INSERT INTO Usuarios (nombre, apellido, email, 'password', activo, 'admin', telefono) VALUES ('$name', '$surname', '$mail', '$password', '$active', '$admin', '$telephone')";
-            
+            return "INSERT INTO usuarios (nombre, apellido, email, password, activo, admin, telefono) VALUES ('$name', '$surname', '$mail', '$password', $active, $admin , '$telephone')";
         }
 
     }
@@ -110,6 +109,26 @@ class usuario {
             
         }else{
             return "UPDATE Usuarios SET nombre = '$name', apellido = '$surname', email = '$mail', telefono = '$telephone' WHERE id = $id";
+            
+        }
+
+    }
+
+    public static function modifyUserFromAdmin($user, $idUser){
+        include "../conexion.php";
+        $name = $user['name'];
+        $surname = $user['surname'];
+        $mail = $user['mail'];
+        $password = $user['password'];
+        $active = $user['active'];
+        $admin = $user['admin'];
+        $telephone = $user['telephone'];
+
+        if($stmt = $conn->query("UPDATE usuarios SET nombre = '$name', apellido = '$surname', email = '$mail', password = '$password', activo = $active, admin = $admin, telefono = '$telephone' WHERE id = $idUser")){
+            return "Usuario modificado correctamente";
+            
+        }else{
+            return "UPDATE usuarios SET nombre = '$name', apellido = '$surname', email = '$mail', password = '$password', activo = $active, admin = $admin, telefono = '$telephone' WHERE id = $idUser";
             
         }
 
@@ -155,6 +174,17 @@ class usuario {
         }else{
             return "UPDATE Usuario SET password = '$newPassword' WHERE id = $idUsuario";
         }
+    }
         
+    public static function deleteUser($idUser){
+        include "../conexion.php";
+
+        $sql = "DELETE FROM usuarios WHERE id = $idUser";
+        
+        if(mysqli_query($conn,$sql)){
+            return "El usuario se elimino correctamente";
+        }else{
+            return $sql;
+        }
     }
 }
